@@ -28,6 +28,7 @@
   "author": "Claude Code",
   "license": "MIT",
   "dependencies": {
+    "clsx": "^2.1.1",
     "html2canvas": "^1.4.1",
     "i18next": "^25.4.2",
     "i18next-browser-languagedetector": "^8.2.0",
@@ -37,7 +38,8 @@
     "pdfjs-dist": "^5.4.54",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-i18next": "^15.7.2"
+    "react-i18next": "^15.7.2",
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",
