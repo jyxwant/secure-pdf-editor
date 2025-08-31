@@ -1,4 +1,5 @@
 import { I18nTest } from './components/I18nTest';
+import { Analytics } from '@vercel/analytics/react';
 import React, { useCallback, useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Shield, FileX, AlertCircle, CheckCircle, RefreshCw } from 'lucide-react';
@@ -773,6 +774,7 @@ function App() {
           </div>
         )}
       </main>
+      <Analytics />
     </div>
   );
 }
