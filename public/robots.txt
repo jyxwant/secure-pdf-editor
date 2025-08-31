@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://secureredact.tech/sitemap.xml
+Sitemap: https://www.secureredact.tech/sitemap.xml
+
+# Allow search engines to crawl all content
+Disallow: 
+
+# Allow common bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /

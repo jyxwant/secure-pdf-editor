@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Main pages for root domain -->
+  <url>
+    <loc>https://secureredact.tech/</loc>
+    <lastmod>2024-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://secureredact.tech/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://secureredact.tech/" />
+  </url>
+
+  <!-- Main pages for www subdomain -->
+  <url>
+    <loc>https://www.secureredact.tech/</loc>
+    <lastmod>2024-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.secureredact.tech/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.secureredact.tech/" />
+  </url>
+
+</urlset>
