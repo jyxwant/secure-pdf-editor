@@ -1,0 +1,61 @@
+{
+  "name": "secure-pdf-editor",
+  "version": "1.0.0",
+  "description": "A secure PDF editor with redaction capabilities - complete local processing with multi-language support",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "build:prod": "tsc -b && BUILD_MODE=prod vite build",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "preview": "vite preview",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed"
+  },
+  "keywords": [
+    "pdf",
+    "editor",
+    "security",
+    "redaction",
+    "privacy",
+    "react",
+    "typescript",
+    "i18n"
+  ],
+  "author": "Claude Code",
+  "license": "MIT",
+  "dependencies": {
+    "html2canvas": "^1.4.1",
+    "i18next": "^25.4.2",
+    "i18next-browser-languagedetector": "^8.2.0",
+    "jspdf": "^3.0.2",
+    "lucide-react": "^0.364.0",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^5.4.54",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-i18next": "^15.7.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.15.0",
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^22.10.7",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "10.4.20",
+    "eslint": "^9.15.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.14",
+    "globals": "^15.12.0",
+    "playwright": "^1.55.0",
+    "postcss": "8.4.49",
+    "tailwindcss": "v3.4.16",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.15.0",
+    "vite": "^6.0.1"
+  }
+}

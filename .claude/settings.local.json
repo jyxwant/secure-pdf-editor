@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(start http://localhost:5173)",
+      "Bash(npm install:*)",
+      "Bash(npx playwright install:*)",
+      "Bash(node:*)",
+      "Bash(npm run test:*)",
+      "Bash(del:*)",
+      "Bash(del /q publicuse.txt)",
+      "Bash(npm run build:*)",
+      "Bash(npx playwright test:*)",
+      "Bash(curl:*)",
+      "Bash(start http://localhost:5175)",
+      "Bash(npx tsc:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
