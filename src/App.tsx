@@ -2,7 +2,7 @@ import { I18nTest } from './components/I18nTest';
 import { Analytics } from '@vercel/analytics/react';
 import React, { useCallback, useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Shield, FileX, AlertCircle, CheckCircle, RefreshCw } from 'lucide-react';
+import { Shield, FileX, AlertCircle, CheckCircle, RefreshCw, Github } from 'lucide-react';
 import { FileUploader } from './components/pdf/FileUploader';
 import { PDFViewer } from './components/pdf/PDFViewer';
 import { Toolbar } from './components/pdf/Toolbar';
@@ -14,7 +14,7 @@ type ViewState = 'upload' | 'editor';
 type RedactionMethod = 'canvas' | 'pixelate'; // 暂时隐藏 rebuild
 
 function App() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   
   // 状态管理
   const [viewState, setViewState] = useState<ViewState>('upload');
@@ -374,6 +374,15 @@ function App() {
             </div>
             
             <div className="flex items-center space-x-3">
+              <a
+                href="https://github.com/jyxwant/secure-pdf-editor"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                title={t('app.viewOnGitHub')}
+              >
+                <Github className="w-5 h-5" />
+              </a>
               <LanguageSelector />
               {viewState === 'editor' && (
                 <>
@@ -596,18 +605,17 @@ function App() {
       {/* 主要内容区域 */}
       <main className="flex-1">
         {viewState === 'upload' ? (
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-            <div className="text-center mb-6 sm:mb-8">
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3" translate="no">
-                {t('upload.title')}
-              </h2>
-              <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
-                {t('upload.description')}
-              </p>
+          <div className="max-w-4xl mx-auto p-6">
+            <div className="text-center mb-8">
+              <div className="flex items-center justify-center mb-4">
+                <Shield className="w-8 h-8 text-blue-600 mr-2" />
+                <h1 className="text-3xl font-bold text-gray-900">{t('upload.title')}</h1>
+              </div>
+              <p className="text-gray-600 mb-8">{t('upload.description')}</p>
             </div>
 
-            {/* 上传规则说明 */}
-            <div className="mb-8 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
+            {/* 简洁的信息说明区域 */}
+            <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
               <h3 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
                 <svg className="w-5 h-5 text-blue-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
@@ -615,10 +623,10 @@ function App() {
                 {t('upload.requirements.title')}
               </h3>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* 文件要求 */}
                 <div>
-                  <h4 className="text-sm font-medium text-gray-800 mb-3">{t('upload.fileRequirements.title')}</h4>
+                  <h4 className="text-sm font-semibold text-gray-800 mb-3">{t('upload.fileRequirements.title')}</h4>
                   <div className="space-y-2">
                     <div className="flex items-center text-sm text-gray-700">
                       <svg className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -638,33 +646,27 @@ function App() {
                       </svg>
                       <span>{t('upload.fileRequirements.password')}</span>
                     </div>
-                    <div className="flex items-center text-sm text-gray-700">
-                      <svg className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                      <span>{t('upload.fileRequirements.fileName')}</span>
-                    </div>
                   </div>
                 </div>
 
                 {/* 使用流程 */}
                 <div>
-                  <h4 className="text-sm font-medium text-gray-800 mb-3">{t('upload.usageFlow.title')}</h4>
+                  <h4 className="text-sm font-semibold text-gray-800 mb-3">{t('upload.usageFlow.title')}</h4>
                   <div className="space-y-2">
                     <div className="flex items-start text-sm text-gray-700">
-                      <span className="bg-blue-100 text-blue-800 text-xs px-1.5 py-0.5 rounded-full mr-2 mt-0.5 flex-shrink-0 font-medium">1</span>
+                      <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mr-3 mt-0.5 flex-shrink-0 font-medium">1</span>
                       <span>{t('upload.usageFlow.step1')}</span>
                     </div>
                     <div className="flex items-start text-sm text-gray-700">
-                      <span className="bg-blue-100 text-blue-800 text-xs px-1.5 py-0.5 rounded-full mr-2 mt-0.5 flex-shrink-0 font-medium">2</span>
+                      <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mr-3 mt-0.5 flex-shrink-0 font-medium">2</span>
                       <span>{t('upload.usageFlow.step2')}</span>
                     </div>
                     <div className="flex items-start text-sm text-gray-700">
-                      <span className="bg-blue-100 text-blue-800 text-xs px-1.5 py-0.5 rounded-full mr-2 mt-0.5 flex-shrink-0 font-medium">3</span>
+                      <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mr-3 mt-0.5 flex-shrink-0 font-medium">3</span>
                       <span>{t('upload.usageFlow.step3')}</span>
                     </div>
                     <div className="flex items-start text-sm text-gray-700">
-                      <span className="bg-blue-100 text-blue-800 text-xs px-1.5 py-0.5 rounded-full mr-2 mt-0.5 flex-shrink-0 font-medium">4</span>
+                      <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mr-3 mt-0.5 flex-shrink-0 font-medium">4</span>
                       <span>{t('upload.usageFlow.step4')}</span>
                     </div>
                   </div>
@@ -672,19 +674,18 @@ function App() {
               </div>
 
               {/* 安全保障 */}
-              <div className="mt-6 p-4 bg-white/70 rounded-lg border border-blue-200">
+              <div className="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
                 <div className="flex items-center mb-2">
-                  <svg className="w-4 h-4 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-sm font-medium text-green-800">{t('security.localProcessing')}</span>
+                  <span className="font-medium text-green-800">{t('security.localProcessing')}</span>
                 </div>
-                <p className="text-xs text-gray-600">
-                  {t('security.description')}
-                </p>
+                <p className="text-sm text-green-700">{t('security.description')}</p>
               </div>
             </div>
 
+            {/* 上传区域 */}
             <FileUploader 
               onFileSelect={handleFileSelect}
               loading={loading}
@@ -774,6 +775,82 @@ function App() {
           </div>
         )}
       </main>
+      {/* 紧凑但美观的Footer - 法语界面特殊优化 */}
+      <footer className="bg-gradient-to-r from-gray-50 to-slate-50 border-t border-gray-200/70">
+        <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${i18n.language === 'fr' ? 'py-2.5' : 'py-4'}`}>
+          <div className={`flex flex-col md:flex-row items-center justify-between ${i18n.language === 'fr' ? 'space-y-2 md:space-y-0' : 'space-y-3 md:space-y-0'}`}>
+            {/* Left - Project Info */}
+            <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-2">
+                <Shield className={`${i18n.language === 'fr' ? 'w-4 h-4' : 'w-5 h-5'} text-blue-600`} />
+                <div>
+                  <span className={`${i18n.language === 'fr' ? 'text-xs' : 'text-sm'} font-semibold text-gray-800`}>{t('app.title')}</span>
+                  <p className="text-xs text-gray-500">{t('security.localProcessing')}</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Center - GitHub Message with better styling */}
+            <div className={`flex-1 ${i18n.language === 'fr' ? 'max-w-md mx-3' : 'max-w-lg mx-4'} text-center`}>
+              <div className={`bg-white/80 rounded-lg ${i18n.language === 'fr' ? 'px-3 py-1.5' : 'px-4 py-2'} border border-gray-200/50 shadow-sm`}>
+                <div className="flex items-center justify-center space-x-2">
+                  <Github className={`${i18n.language === 'fr' ? 'w-3 h-3' : 'w-4 h-4'} text-gray-700`} />
+                  <span className={`${i18n.language === 'fr' ? 'text-xs' : 'text-sm'} font-medium text-gray-800`}>{t('footer.openSource')}</span>
+                </div>
+                <p className={`text-xs text-gray-600 ${i18n.language === 'fr' ? 'mt-0.5 leading-tight' : 'mt-1 leading-relaxed'}`}>
+                  {t('footer.feedback')}
+                </p>
+              </div>
+            </div>
+            
+            {/* Right - Styled Action Links */}
+            <div className={`flex items-center ${i18n.language === 'fr' ? 'space-x-2' : 'space-x-3'}`}>
+              <a
+                href="https://github.com/jyxwant/secure-pdf-editor"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex items-center space-x-2 bg-gray-800 text-white ${i18n.language === 'fr' ? 'px-2.5 py-1.5 text-xs' : 'px-3 py-2 text-sm'} rounded-lg hover:bg-gray-700 transition-colors font-medium shadow-sm`}
+                title={t('app.viewOnGitHub')}
+              >
+                <Github className="w-4 h-4" />
+                <span>{t('footer.repo')}</span>
+              </a>
+              <a
+                href="https://github.com/jyxwant/secure-pdf-editor/issues"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex items-center space-x-2 bg-blue-600 text-white ${i18n.language === 'fr' ? 'px-2.5 py-1.5 text-xs' : 'px-3 py-2 text-sm'} rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-sm`}
+                title={t('footer.issuesDesc')}
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                </svg>
+                <span>{t('footer.issues')}</span>
+              </a>
+            </div>
+          </div>
+          
+          {/* Copyright line - compact, 法语界面更紧凑 */}
+          {i18n.language !== 'fr' && (
+            <div className="mt-3 pt-2 border-t border-gray-200/50 text-center">
+              <div className="flex items-center justify-center space-x-4 text-xs text-gray-500">
+                <span>© 2024 PDF Security Editor</span>
+                <span>•</span>
+                <span>{t('footer.madeWith')} ❤️</span>
+              </div>
+            </div>
+          )}
+          
+          {/* 法语界面的版权信息更紧凑 */}
+          {i18n.language === 'fr' && (
+            <div className="mt-2 pt-1 border-t border-gray-200/50 text-center">
+              <div className="text-xs text-gray-500">
+                <span>© 2024 • {t('footer.madeWith')} ❤️</span>
+              </div>
+            </div>
+          )}
+        </div>
+      </footer>
       <Analytics />
     </div>
   );

@@ -38,14 +38,14 @@ export const LanguageSelector: React.FC = () => {
     <div className="relative inline-block text-left">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex items-center px-2.5 py-1.5 border border-gray-200 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200"
+        className="inline-flex items-center px-3 py-2 border border-gray-200 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 min-w-[100px]"
         aria-haspopup="true"
         aria-expanded={isOpen}
       >
-        <span className="text-base mr-1">{currentLanguage.flag}</span>
-        <span className="hidden md:inline text-sm">{currentLanguage.name}</span>
+        <span className="text-base mr-2">{currentLanguage.flag}</span>
+        <span className="inline text-sm font-medium">{currentLanguage.name}</span>
         <svg
-          className="ml-2 -mr-1 h-4 w-4"
+          className="ml-2 -mr-1 h-4 w-4 flex-shrink-0"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
@@ -68,9 +68,9 @@ export const LanguageSelector: React.FC = () => {
           />
           
           {/* Dropdown */}
-          <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-20">
+          <div className="origin-top-right absolute right-0 mt-2 w-52 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-20">
             <div className="py-1" role="menu" aria-orientation="vertical">
-              <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-100">
+              <div className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-100">
                 {t('language.selector')}
               </div>
               {languages.map((language) => (
@@ -78,7 +78,7 @@ export const LanguageSelector: React.FC = () => {
                   key={language.code}
                   onClick={() => handleLanguageChange(language.code)}
                   className={`
-                    w-full text-left px-4 py-2 text-sm transition-colors
+                    w-full text-left px-4 py-3 text-sm transition-colors flex items-center
                     ${i18n.language === language.code 
                       ? 'bg-blue-50 text-blue-700 font-medium' 
                       : 'text-gray-700 hover:bg-gray-100'
@@ -86,10 +86,10 @@ export const LanguageSelector: React.FC = () => {
                   `}
                   role="menuitem"
                 >
-                  <span className="mr-3">{language.flag}</span>
-                  {language.name}
+                  <span className="mr-3 text-base">{language.flag}</span>
+                  <span className="flex-1 font-medium">{language.name}</span>
                   {i18n.language === language.code && (
-                    <span className="ml-2 text-blue-600">✓</span>
+                    <span className="ml-2 text-blue-600 font-bold">✓</span>
                   )}
                 </button>
               ))}

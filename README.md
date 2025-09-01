@@ -5,77 +5,63 @@
 [![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-A **secure, privacy-focused PDF editor** with redaction capabilities. All processing happens locally in your browser - no data ever leaves your device.
+A secure, privacy‑first PDF redaction editor. All processing happens locally in your browser — no files are uploaded and no data ever leaves your device.
+
+Translations: [中文 (Simplified Chinese)](readme/README.zh-CN.md) • [Français](readme/README.fr.md)
 
 ---
 
 ## ✨ Features
 
-### 🔐 **Complete Privacy & Security**
-- **100% Local Processing** - No data transmission to servers
-- **No File Upload** - All operations happen in your browser
-- **Instant Processing** - No waiting for server responses
-- **Privacy by Design** - Your sensitive documents never leave your device
+### 🔐 Privacy & Security
+- 100% local processing: runs entirely in the browser
+- No uploads, no network requests, no server storage
+- In‑memory processing only; nothing persists after refresh
+- Metadata cleanup on export to reduce residual traces
 
-### 📝 **PDF Redaction Capabilities**
-- **Visual Selection** - Drag and drop to mark sensitive areas
-- **Multiple Processing Methods**:
-  - 🎨 **Canvas Screenshot** - Convert to image (highest security, unrecoverable)
-  - 🔲 **Pixelation** - Blur sensitive content while maintaining PDF structure
-- **Real-time Preview** - See exactly how your redacted PDF will look
-- **Undo/Redo Support** - Easily correct mistakes
+### 📝 Redaction Methods
+- Visual selection: drag to mark sensitive areas
+- Two built‑in methods:
+  - Canvas render: converts pages to images; strongest, unrecoverable
+  - Pixelation: mosaics marked areas while keeping page layout
+- Real‑time preview, undo/redo, and color‑coded marks
 
-### 🌍 **Multi-Language Support**
-Support for **8 languages** including UN official languages:
-- 🇺🇸 **English** (Default)
-- 🇨🇳 **中文 (Chinese)**
-- 🇫🇷 **Français (French)**
-- 🇪🇸 **Español (Spanish)**
-- 🇸🇦 **العربية (Arabic)**
-- 🇷🇺 **Русский (Russian)**
-- 🇯🇵 **日本語 (Japanese)**
-- 🇰🇷 **한국어 (Korean)**
+### 🌍 Internationalization
+- English (default), 简体中文, Français (UI language selector included)
 
-### 🎨 **Modern User Experience**
-- **Responsive Design** - Works on desktop, tablet, and mobile
-- **Intuitive Interface** - Easy-to-use drag-and-drop functionality
-- **Thumbnail Navigation** - Quick page navigation and overview
-- **Zoom Controls** - Precise editing with zoom in/out
-- **Color-Coded Marks** - Distinguish different types of sensitive information
+### 🎨 UX
+- Responsive layout for desktop and mobile
+- Thumbnail navigation, zoom controls, fit‑to‑width
+- Keyboard shortcuts for fast editing
 
 ---
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- **Node.js** 18.0.0 or higher
-- **npm**, **yarn**, or **pnpm**
+### Requirements
+- Node.js 18+
+- npm, yarn, or pnpm
 
-### Installation
-
-1. **Clone the repository**
+### Setup
+1. Clone
    ```bash
-   git clone https://github.com/your-username/secure-pdf-editor.git
+   git clone https://github.com/jyxwant/secure-pdf-editor.git
    cd secure-pdf-editor
    ```
-
-2. **Install dependencies**
+2. Install
    ```bash
    npm install
    ```
-
-3. **Start development server**
+3. Develop
    ```bash
    npm run dev
    ```
-
-4. **Open in browser**
+4. Open
    ```
    http://localhost:5173
    ```
 
-### Production Build
-
+### Production
 ```bash
 npm run build
 npm run preview
@@ -85,46 +71,34 @@ npm run preview
 
 ## 🛠 Usage
 
-### Basic Workflow
+1. Upload a PDF (max 50MB; password‑protected files not supported)
+2. Drag to mark sensitive areas (text, images, regions)
+3. Preview the effect
+4. Choose a method (Canvas render or Pixelation)
+5. Download the secured PDF
 
-1. **📁 Upload PDF** - Drag and drop or click to select your PDF file (max 50MB)
-2. **✏️ Mark Sensitive Areas** - Drag to select text, images, or areas to redact
-3. **👀 Preview** - Check how your redacted document will look
-4. **⚙️ Choose Method** - Select Canvas (highest security) or Pixelation
-5. **💾 Download** - Get your secure PDF with sensitive information permanently removed
-
-### Keyboard Shortcuts
+Keyboard shortcuts:
 
 | Shortcut | Action |
 |----------|--------|
 | `←` `→` | Navigate pages |
-| `+` `-` | Zoom in/out |
+| `+` `-` | Zoom in / out |
+| `0` | Reset zoom |
 | `F` | Fit to width |
-| `Space` | Toggle view mode |
+| `Space` | Toggle pan mode |
 | `Delete` | Remove selected mark |
-| `Ctrl+Z` | Undo |
-| `Ctrl+Y` | Redo |
+| `Ctrl+Z` `Ctrl+Y` | Undo / Redo |
 | `Esc` | Cancel current action |
 
 ---
 
-## 🏗 Technology Stack
+## 🏗 Tech Stack
 
-### Core Technologies
-- **⚛️ React 18** - Modern React with hooks and TypeScript
-- **📘 TypeScript** - Type safety and better development experience
-- **⚡ Vite** - Lightning-fast build tool and dev server
-- **🎨 Tailwind CSS** - Utility-first CSS framework
-
-### PDF Processing
-- **📄 PDF.js** - Mozilla's PDF rendering library
-- **📝 PDF-lib** - PDF creation and manipulation
-- **🖥️ HTML2Canvas** - Canvas-based screenshot generation
-
-### Internationalization
-- **🌐 react-i18next** - React integration for i18next
-- **🗣️ i18next** - Internationalization framework
-- **🔍 i18next-browser-languagedetector** - Automatic language detection
+- React 18 + TypeScript
+- Vite 6 + Tailwind CSS
+- PDF.js for rendering
+- pdf-lib for PDF generation/manipulation
+- i18next + react‑i18next (+ browser language detector)
 
 ---
 
@@ -132,63 +106,59 @@ npm run preview
 
 ```
 src/
-├── components/           # React components
-│   ├── pdf/             # PDF-specific components
-│   │   ├── FileUploader.tsx
-│   │   ├── PDFViewer.tsx
-│   │   ├── Toolbar.tsx
-│   │   └── ThumbnailView.tsx
+├── components/
+│   ├── pdf/              # FileUploader, PDFViewer, Toolbar, ThumbnailView
 │   ├── LanguageSelector.tsx
 │   └── ...
-├── hooks/               # Custom React hooks
-├── i18n/               # Internationalization
-│   └── index.ts        # Language definitions
-├── lib/                # Utility functions
-└── workers/            # Web Workers
+├── hooks/                # usePDFProcessor (rendering + redaction)
+├── i18n/                 # i18n resources
+├── lib/                  # utils
+└── workers/              # pdf.worker
 ```
 
 ---
 
 ## 🧪 Testing
 
-```bash
-# Run end-to-end tests
-npm run test
+End‑to‑end tests use Playwright.
 
-# Run tests with UI
-npm run test:ui
+```bash
+npm run test      # headless
+npm run test:ui   # with UI
 ```
 
 ---
 
-## 🔒 Security & Privacy
+## 🔒 Security Notes
 
-### Security Features
-- ✅ **No Network Requests** - All processing happens locally
-- ✅ **No Data Storage** - Files are processed in memory only
-- ✅ **Secure Redaction** - Multiple redaction methods available
-- ✅ **Complete Removal** - Sensitive data is permanently unrecoverable
-
-### Privacy Guarantee
-**Your privacy is our priority.** This application:
-- Does **NOT** upload your files to any server
-- Does **NOT** store your files locally
-- Does **NOT** collect any user data
-- Does **NOT** require registration or login
+- No network requests; all work is local in the browser
+- Export cleans common metadata fields
+- Canvas render produces rasterized pages; sensitive content is not recoverable
+- Pixelation masks areas visually while keeping overall layout
 
 ---
 
-## 🎉 Acknowledgments
+## 💬 Feedback
 
-- **Mozilla PDF.js** - For excellent PDF rendering capabilities
-- **Tailwind CSS** - For beautiful, utility-first styling
-- **React Community** - For the amazing ecosystem
+- Issues: https://github.com/jyxwant/secure-pdf-editor/issues
+- Repo: https://github.com/jyxwant/secure-pdf-editor
 
 ---
+
+## 📚 Readme Translations
+
+- 中文（简体）: readme/README.zh-CN.md
+- Français: readme/README.fr.md
+
+---
+
+## 📝 License
+
+MIT License — see LICENSE for details.
 
 <div align="center">
 
-**⭐ If this project helps you, please consider giving it a star! ⭐**
+If this project helps you, a star is appreciated!
 
 Made with ❤️ for privacy and security
 

@@ -10,6 +10,7 @@ const resources = {
       'app.title': 'PDF Security Editor',
       'app.subtitle': 'Drag to select sensitive areas',
       'app.back': 'Back',
+      'app.viewOnGitHub': 'View on GitHub',
       
       // File Upload
       'upload.title': 'Upload PDF File',
@@ -162,6 +163,14 @@ const resources = {
       'error.pageNotExist': 'Page {{pageNum}} does not exist, skipping...',
       'error.textAnalysisFailed': 'Page {{pageNum}} text analysis failed, using basic masking method',
       'error.metadataCleaningFailed': 'Metadata cleaning failed',
+      
+      // Footer / Links
+      'footer.feedback': 'Questions or suggestions? Please open an issue on GitHub — I actively maintain this project.',
+      'footer.repo': 'Repository',
+      'footer.issues': 'Issues',
+      'footer.openSource': 'Open Source Project',
+      'footer.issuesDesc': 'Report issues or suggestions',
+      'footer.madeWith': 'Made with',
     }
   },
   zh: {
@@ -170,6 +179,7 @@ const resources = {
       'app.title': 'PDF安全编辑器',
       'app.subtitle': '拖拽选择敏感区域',
       'app.back': '返回',
+      'app.viewOnGitHub': '在 GitHub 查看',
       
       // File Upload
       'upload.title': '上传PDF文件',
@@ -318,7 +328,15 @@ const resources = {
       'error.pageProcessingError': '处理第{{pageNum}}页时出错',
       'error.pageNotExist': '第{{pageNum}}页不存在，跳过...',
       'error.textAnalysisFailed': '第{{pageNum}}页文本分析失败，使用基础遮罩方法',
-      'error.metadataCleaningFailed': '元数据清理失败'
+      'error.metadataCleaningFailed': '元数据清理失败',
+
+      // Footer / Links
+      'footer.feedback': '有问题或建议？请到 GitHub Issue 提交（我会积极跟进）。',
+      'footer.repo': '仓库地址',
+      'footer.issues': '问题反馈',
+      'footer.openSource': '开源项目',
+      'footer.issuesDesc': '报告问题或建议',
+      'footer.madeWith': '用心制作',
     }
   },
   fr: {
@@ -327,6 +345,7 @@ const resources = {
       'app.title': 'Éditeur PDF Sécurisé',
       'app.subtitle': 'Glissez pour sélectionner les zones sensibles',
       'app.back': 'Retour',
+      'app.viewOnGitHub': 'Voir sur GitHub',
       
       // File Upload
       'upload.title': 'Éditeur PDF Sécurisé',
@@ -478,7 +497,15 @@ const resources = {
       'error.pageProcessingError': 'Erreur lors du traitement de la page {{pageNum}}',
       'error.pageNotExist': 'La page {{pageNum}} n\'existe pas, ignorée...',
       'error.textAnalysisFailed': 'Analyse de texte de la page {{pageNum}} échouée, utilisation de la méthode de masquage de base',
-      'error.metadataCleaningFailed': 'Échec du nettoyage des métadonnées'
+      'error.metadataCleaningFailed': 'Échec du nettoyage des métadonnées',
+
+      // Footer / Links
+      'footer.feedback': 'Des questions ou idées ? Ouvrez une issue sur GitHub — je maintiens activement ce projet.',
+      'footer.repo': 'Dépôt',
+      'footer.issues': 'Issues',
+      'footer.openSource': 'Projet Open Source',
+      'footer.issuesDesc': 'Signaler des problèmes ou suggestions',
+      'footer.madeWith': 'Fait avec',
     }
   }
 };
