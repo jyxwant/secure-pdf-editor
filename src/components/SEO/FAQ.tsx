@@ -21,36 +21,36 @@ export const FAQ: React.FC = () => {
 
   const faqItems: FAQItem[] = [
     {
-      question: t('faq.whatIsRedaction.question', 'What is PDF redaction and why is it important?'),
-      answer: t('faq.whatIsRedaction.answer', 'PDF redaction is the process of permanently removing sensitive information from PDF documents. Unlike simple deletion or covering text with shapes, true redaction completely removes the underlying data, making it impossible to recover. This is crucial for GDPR, HIPAA compliance, and protecting personal information in legal, healthcare, and business documents.')
+      question: t('faq.whatIsRedaction.question'),
+      answer: t('faq.whatIsRedaction.answer')
     },
     {
-      question: t('faq.howSecure.question', 'How secure is your PDF redaction tool?'),
-      answer: t('faq.howSecure.answer', 'Our tool processes all PDF files locally in your browser - no files are ever uploaded to our servers. This means your sensitive documents never leave your computer, providing maximum privacy and security. We use advanced PDF processing techniques to ensure redacted information is completely removed from the document structure.')
+      question: t('faq.howSecure.question'),
+      answer: t('faq.howSecure.answer')
     },
     {
-      question: t('faq.fileSize.question', 'What file size limits do you have?'),
-      answer: t('faq.fileSize.answer', 'Our tool supports PDF files up to 50MB in size. This covers most standard business documents, legal papers, and reports. Processing is done locally in your browser, so larger files may take longer to process depending on your device capabilities.')
+      question: t('faq.fileSize.question'),
+      answer: t('faq.fileSize.answer')
     },
     {
-      question: t('faq.browserSupport.question', 'Which browsers are supported?'),
-      answer: t('faq.browserSupport.answer', 'Our PDF redaction tool works in all modern web browsers including Chrome, Firefox, Safari, and Edge. We recommend using the latest version of your browser for optimal performance. JavaScript must be enabled for the tool to function.')
+      question: t('faq.browserSupport.question'),
+      answer: t('faq.browserSupport.answer')
     },
     {
-      question: t('faq.redactionMethods.question', 'What redaction methods do you offer?'),
-      answer: t('faq.redactionMethods.answer', 'We offer two primary redaction methods: 1) Black-out redaction - completely covers sensitive areas with solid black rectangles, 2) Pixelation - obscures text and images with pixelated overlays. Both methods ensure the original content cannot be recovered.')
+      question: t('faq.redactionMethods.question'),
+      answer: t('faq.redactionMethods.answer')
     },
     {
-      question: t('faq.compliance.question', 'Is this tool suitable for legal and compliance requirements?'),
-      answer: t('faq.compliance.answer', 'Yes, our tool is designed to meet strict compliance requirements including GDPR, HIPAA, and legal discovery standards. The redaction process permanently removes sensitive data from the PDF structure, making it forensically sound for legal and regulatory purposes.')
+      question: t('faq.compliance.question'),
+      answer: t('faq.compliance.answer')
     },
     {
-      question: t('faq.multiLanguage.question', 'Do you support multiple languages?'),
-      answer: t('faq.multiLanguage.answer', 'Yes, our interface supports multiple languages including English, Chinese, and others. The redaction functionality works with PDF documents in any language, as it operates on the visual content rather than text recognition.')
+      question: t('faq.multiLanguage.question'),
+      answer: t('faq.multiLanguage.answer')
     },
     {
-      question: t('faq.cost.question', 'Is this tool completely free?'),
-      answer: t('faq.cost.answer', 'Yes, our PDF redaction tool is completely free to use with no hidden charges, subscriptions, or usage limits. We believe document privacy should be accessible to everyone. The tool is open-source and community-driven.')
+      question: t('faq.cost.question'),
+      answer: t('faq.cost.answer')
     }
   ];
 
@@ -59,10 +59,10 @@ export const FAQ: React.FC = () => {
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            {t('faq.title', 'Frequently Asked Questions')}
+            {t('faq.title')}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            {t('faq.subtitle', 'Everything you need to know about secure PDF redaction and document privacy protection.')}
+            {t('faq.subtitle')}
           </p>
         </div>
 
@@ -100,16 +100,16 @@ export const FAQ: React.FC = () => {
         {/* Call to Action */}
         <div className="text-center mt-10 pt-8 border-t border-gray-200">
           <h3 className="text-xl font-semibold text-gray-900 mb-3">
-            {t('faq.cta.title', 'Ready to Secure Your Documents?')}
+            {t('faq.cta.title')}
           </h3>
           <p className="text-gray-600 mb-6">
-            {t('faq.cta.description', 'Start redacting sensitive information from your PDF files now with our free, secure tool.')}
+            {t('faq.cta.description')}
           </p>
           <button 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-sm"
           >
-            {t('faq.cta.button', 'Start Redacting Now')}
+            {t('faq.cta.button')}
           </button>
         </div>
       </div>

@@ -8,42 +8,42 @@ export const UserGuide: React.FC = () => {
   const steps = [
     {
       icon: Upload,
-      title: t('guide.step1.title', 'Upload Your PDF'),
-      description: t('guide.step1.description', 'Select and upload your PDF document. Files are processed locally in your browser for maximum security - no uploads to external servers.'),
+      title: t('guide.step1.title'),
+      description: t('guide.step1.description'),
       details: [
-        t('guide.step1.detail1', 'Support for PDF files up to 50MB'),
-        t('guide.step1.detail2', 'Compatible with all PDF versions'),
-        t('guide.step1.detail3', 'No account or registration required')
+        t('guide.step1.detail1'),
+        t('guide.step1.detail2'),
+        t('guide.step1.detail3')
       ]
     },
     {
       icon: Edit3,
-      title: t('guide.step2.title', 'Mark Sensitive Areas'),
-      description: t('guide.step2.description', 'Click and drag to select areas containing sensitive information. You can mark multiple areas across different pages.'),
+      title: t('guide.step2.title'),
+      description: t('guide.step2.description'),
       details: [
-        t('guide.step2.detail1', 'Precise rectangular selection tool'),
-        t('guide.step2.detail2', 'Multiple redaction areas per page'),
-        t('guide.step2.detail3', 'Undo/redo functionality available')
+        t('guide.step2.detail1'),
+        t('guide.step2.detail2'),
+        t('guide.step2.detail3')
       ]
     },
     {
       icon: Lock,
-      title: t('guide.step3.title', 'Choose Redaction Method'),
-      description: t('guide.step3.description', 'Select between black-out redaction or pixelation based on your security needs and document requirements.'),
+      title: t('guide.step3.title'),
+      description: t('guide.step3.description'),
       details: [
-        t('guide.step3.detail1', 'Black-out: Complete coverage with solid color'),
-        t('guide.step3.detail2', 'Pixelation: Obscure with pixelated overlay'),
-        t('guide.step3.detail3', 'Both methods ensure data is unrecoverable')
+        t('guide.step3.detail1'),
+        t('guide.step3.detail2'),
+        t('guide.step3.detail3')
       ]
     },
     {
       icon: Download,
-      title: t('guide.step4.title', 'Download Secure PDF'),
-      description: t('guide.step4.description', 'Process and download your redacted PDF. The sensitive information is permanently removed from the document structure.'),
+      title: t('guide.step4.title'),
+      description: t('guide.step4.description'),
       details: [
-        t('guide.step4.detail1', 'Instant processing and download'),
-        t('guide.step4.detail2', 'Original document structure preserved'),
-        t('guide.step4.detail3', 'Forensically sound redaction')
+        t('guide.step4.detail1'),
+        t('guide.step4.detail2'),
+        t('guide.step4.detail3')
       ]
     }
   ];
@@ -51,18 +51,18 @@ export const UserGuide: React.FC = () => {
   const features = [
     {
       icon: Shield,
-      title: t('features.security.title', 'Maximum Security'),
-      description: t('features.security.description', 'All processing happens locally in your browser. Your sensitive documents never leave your computer.')
+      title: t('features.security.title'),
+      description: t('features.security.description')
     },
     {
       icon: Globe,
-      title: t('features.multilingual.title', 'Multi-Language Support'),
-      description: t('features.multilingual.description', 'Available in multiple languages with support for documents in any language.')
+      title: t('features.multilingual.title'),
+      description: t('features.multilingual.description')
     },
     {
       icon: Zap,
-      title: t('features.performance.title', 'Fast Processing'),
-      description: t('features.performance.description', 'Optimized performance with worker threads for smooth, responsive redaction even on large documents.')
+      title: t('features.performance.title'),
+      description: t('features.performance.description')
     }
   ];
 
@@ -72,10 +72,10 @@ export const UserGuide: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-6">
-            {t('guide.title', 'How to Use Our PDF Redaction Tool')}
+            {t('guide.title')}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            {t('guide.subtitle', 'Follow these simple steps to securely remove sensitive information from your PDF documents. Our tool ensures complete data removal while maintaining document integrity.')}
+            {t('guide.subtitle')}
           </p>
         </div>
 
@@ -90,7 +90,7 @@ export const UserGuide: React.FC = () => {
                     <Icon className="w-6 h-6" />
                   </div>
                   <div className="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full">
-                    {t('guide.step', 'Step')} {index + 1}
+                    {t('guide.step')} {index + 1}
                   </div>
                 </div>
                 
@@ -118,7 +118,7 @@ export const UserGuide: React.FC = () => {
         {/* Key Features */}
         <div className="bg-white rounded-2xl shadow-lg p-8 mb-12">
           <h3 className="text-2xl font-bold text-gray-900 text-center mb-8">
-            {t('guide.keyFeatures', 'Key Features & Benefits')}
+            {t('guide.keyFeatures')}
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -146,10 +146,10 @@ export const UserGuide: React.FC = () => {
           <div className="text-center">
             <Shield className="w-12 h-12 text-green-600 mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              {t('guide.compliance.title', 'Compliance & Security Standards')}
+              {t('guide.compliance.title')}
             </h3>
             <p className="text-lg text-gray-700 mb-6 max-w-3xl mx-auto leading-relaxed">
-              {t('guide.compliance.description', 'Our PDF redaction tool meets strict security and compliance requirements for legal, healthcare, and business use cases.')}
+              {t('guide.compliance.description')}
             </p>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
@@ -157,7 +157,7 @@ export const UserGuide: React.FC = () => {
                 <div key={standard} className="bg-white rounded-lg px-4 py-3 shadow-sm border border-green-200">
                   <div className="text-green-800 font-semibold text-center">{standard}</div>
                   <div className="text-xs text-green-600 text-center mt-1">
-                    {t('guide.compliance.compliant', 'Compliant')}
+                    {t('guide.compliance.compliant')}
                   </div>
                 </div>
               ))}
