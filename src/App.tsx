@@ -7,6 +7,9 @@ import { FileUploader } from './components/pdf/FileUploader';
 import { PDFViewer } from './components/pdf/PDFViewer';
 import { Toolbar } from './components/pdf/Toolbar';
 import { LanguageSelector } from './components/LanguageSelector';
+import { FAQ } from './components/SEO/FAQ';
+import { UserGuide } from './components/SEO/UserGuide';
+import { Features } from './components/SEO/Features';
 import { usePDFProcessor, type RedactionRect, type ProcessingProgress } from './hooks/usePDFProcessor';
 import './App.css';
 
@@ -691,6 +694,13 @@ function App() {
               loading={loading}
               error=""
             />
+            
+            {/* SEO Content Sections */}
+            <div className="mt-12">
+              <Features />
+              <UserGuide />
+              <FAQ />
+            </div>
           </div>
         ) : (
           <div className="flex flex-col lg:flex-row h-[calc(100vh-3.5rem)]">

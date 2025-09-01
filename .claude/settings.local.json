@@ -14,7 +14,8 @@
       "Bash(curl:*)",
       "Bash(start http://localhost:5175)",
       "Bash(npx tsc:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "WebSearch"
     ],
     "deny": [],
     "ask": []
