@@ -10,9 +10,6 @@ import { LanguageSelector } from './components/LanguageSelector';
 import { FAQ } from './components/SEO/FAQ';
 import { UserGuide } from './components/SEO/UserGuide';
 import { Features } from './components/SEO/Features';
-import { SecurityGuide } from './components/SEO/SecurityGuide';
-import { LocalProcessingArticle } from './components/SEO/LocalProcessingArticle';
-import { Tutorial } from './components/SEO/Tutorial';
 import { usePDFProcessor, type RedactionRect, type ProcessingProgress } from './hooks/usePDFProcessor';
 import './App.css';
 
@@ -698,12 +695,9 @@ function App() {
               error=""
             />
             
-            {/* SEO Content Sections - Rich Content Marketing */}
+            {/* SEO Content Sections */}
             <div className="mt-12">
               <Features />
-              <SecurityGuide />
-              <LocalProcessingArticle />
-              <Tutorial />
               <UserGuide />
               <FAQ />
             </div>
