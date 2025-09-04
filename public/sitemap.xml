@@ -5,12 +5,14 @@
   <!-- Main pages for root domain -->
   <url>
     <loc>https://secureredact.tech/</loc>
-    <lastmod>2024-09-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-12-04T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://secureredact.tech/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://secureredact.tech/?lang=zh" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://secureredact.tech/?lang=zh" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://secureredact.tech/?lang=fr" />
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://secureredact.tech/?lang=fr" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://secureredact.tech/" />
   </url>
 

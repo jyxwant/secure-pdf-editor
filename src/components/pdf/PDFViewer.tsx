@@ -475,7 +475,7 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({
       const deltaX = coords.x - dragStartPoint.x;
       const deltaY = coords.y - dragStartPoint.y;
       
-      let newRect = { ...dragStartRect };
+      const newRect = { ...dragStartRect };
       
       switch (resizeHandle) {
         case 'nw': // 左上角

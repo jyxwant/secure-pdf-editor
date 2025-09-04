@@ -15,7 +15,8 @@
       "Bash(start http://localhost:5175)",
       "Bash(npx tsc:*)",
       "Bash(dir:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(npm run lint)"
     ],
     "deny": [],
     "ask": []
