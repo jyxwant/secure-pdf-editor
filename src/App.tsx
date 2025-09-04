@@ -372,8 +372,10 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-14">
             <div className="flex items-center">
-              <Shield className="w-7 h-7 text-blue-600 mr-2" />
-              <h1 className="text-lg font-semibold text-gray-900">{t('app.title')}</h1>
+              <div className="w-8 h-8 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg flex items-center justify-center mr-3 shadow-sm">
+                <Shield className="w-4 h-4 text-white" />
+              </div>
+              <h1 className="text-lg font-semibold text-gray-900 tracking-tight">{t('app.title')}</h1>
             </div>
             
             <div className="flex items-center space-x-3">
@@ -610,19 +612,23 @@ function App() {
         {viewState === 'upload' ? (
           <div className="max-w-4xl mx-auto p-6">
             <div className="text-center mb-8">
-              <div className="flex items-center justify-center mb-4">
-                <Shield className="w-8 h-8 text-blue-600 mr-2" />
-                <h1 className="text-3xl font-bold text-gray-900">{t('upload.title')}</h1>
+              <div className="flex items-center justify-center mb-6">
+                <div className="w-12 h-12 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl flex items-center justify-center mr-4 shadow-md">
+                  <Shield className="w-6 h-6 text-white" />
+                </div>
+                <h1 className="text-3xl font-semibold text-gray-900 tracking-tight">{t('upload.title')}</h1>
               </div>
-              <p className="text-gray-600 mb-8">{t('upload.description')}</p>
+              <p className="text-gray-600 text-lg leading-relaxed font-light mb-8">{t('upload.description')}</p>
             </div>
 
             {/* 简洁的信息说明区域 */}
             <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
               <h3 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
-                <svg className="w-5 h-5 text-blue-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                </svg>
+                <div className="w-6 h-6 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                  <svg className="w-3 h-3 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                  </svg>
+                </div>
                 {t('upload.requirements.title')}
               </h3>
               
@@ -792,7 +798,9 @@ function App() {
             {/* Left - Project Info */}
             <div className="flex items-center space-x-3">
               <div className="flex items-center space-x-2">
-                <Shield className={`${i18n.language === 'fr' ? 'w-4 h-4' : 'w-5 h-5'} text-blue-600`} />
+                <div className={`${i18n.language === 'fr' ? 'w-4 h-4' : 'w-5 h-5'} bg-gray-800 rounded-md flex items-center justify-center`}>
+                  <Shield className={`${i18n.language === 'fr' ? 'w-2 h-2' : 'w-2.5 h-2.5'} text-white`} />
+                </div>
                 <div>
                   <span className={`${i18n.language === 'fr' ? 'text-xs' : 'text-sm'} font-semibold text-gray-800`}>{t('app.title')}</span>
                   <p className="text-xs text-gray-500">{t('security.localProcessing')}</p>

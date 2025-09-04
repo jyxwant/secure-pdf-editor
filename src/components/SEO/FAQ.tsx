@@ -55,41 +55,41 @@ export const FAQ: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-20 bg-gradient-to-b from-gray-50/30 to-white">
       <div className="max-w-3xl mx-auto px-6">
-        {/* Header - 简洁标题 */}
-        <div className="text-center mb-12">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-3">
+        {/* Header - Apple/ChatGPT style */}
+        <div className="text-center mb-16">
+          <h2 className="text-3xl font-semibold text-gray-900 mb-4 tracking-tight">
             {t('faq.title')}
           </h2>
-          <p className="text-gray-600 text-sm">
+          <p className="text-gray-600 text-lg leading-relaxed font-light">
             {t('faq.subtitle')}
           </p>
         </div>
 
-        {/* FAQ Items - 极简设计 */}
-        <div className="space-y-0 border-t border-gray-100">
+        {/* FAQ Items - Clean Apple style */}
+        <div className="bg-white/70 backdrop-blur-sm rounded-2xl border border-gray-100/50 overflow-hidden shadow-sm">
           {faqItems.map((item, index) => (
-            <div key={index} className="border-b border-gray-100">
+            <div key={index} className={`${index !== faqItems.length - 1 ? 'border-b border-gray-100/50' : ''}`}>
               <button
                 onClick={() => toggleItem(index)}
-                className="w-full py-6 text-left flex items-center justify-between hover:bg-gray-50/50 transition-colors duration-150"
+                className="w-full py-6 px-8 text-left flex items-center justify-between hover:bg-gray-50/50 transition-colors duration-200"
               >
-                <h3 className="text-sm font-medium text-gray-900 pr-6 leading-relaxed">
+                <h3 className="text-base font-medium text-gray-900 pr-6 leading-relaxed tracking-tight">
                   {item.question}
                 </h3>
                 <div className="flex-shrink-0">
                   {openItems.includes(index) ? (
-                    <ChevronUp className="w-4 h-4 text-gray-400" />
+                    <ChevronUp className="w-5 h-5 text-gray-400" />
                   ) : (
-                    <ChevronDown className="w-4 h-4 text-gray-400" />
+                    <ChevronDown className="w-5 h-5 text-gray-400" />
                   )}
                 </div>
               </button>
               
               {openItems.includes(index) && (
-                <div className="pb-6 -mt-2">
-                  <p className="text-sm text-gray-600 leading-relaxed pl-0">
+                <div className="pb-6 px-8 -mt-2 animate-in slide-in-from-top-2 duration-200">
+                  <p className="text-gray-600 leading-relaxed font-light">
                     {item.answer}
                   </p>
                 </div>
@@ -98,14 +98,14 @@ export const FAQ: React.FC = () => {
           ))}
         </div>
 
-        {/* Call to Action - 极简按钮 */}
+        {/* Call to Action - Clean Apple style */}
         <div className="text-center mt-12 pt-8">
           <button 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors duration-150"
+            className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors duration-150 bg-gray-50/80 backdrop-blur-sm px-4 py-2 rounded-lg border border-gray-200/50 hover:border-gray-300/50"
           >
             {t('faq.cta.button')}
-            <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 10l7-7m0 0l7 7m-7-7v18" />
             </svg>
           </button>
