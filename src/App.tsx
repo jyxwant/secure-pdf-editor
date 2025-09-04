@@ -372,8 +372,8 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-14">
             <div className="flex items-center">
-              <div className="w-8 h-8 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg flex items-center justify-center mr-3 shadow-sm">
-                <Shield className="w-4 h-4 text-white" />
+              <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3 shadow-sm">
+                <Shield className="w-4 h-4 text-gray-600" />
               </div>
               <h1 className="text-lg font-semibold text-gray-900 tracking-tight">{t('app.title')}</h1>
             </div>
@@ -613,8 +613,8 @@ function App() {
           <div className="max-w-4xl mx-auto p-6">
             <div className="text-center mb-8">
               <div className="flex items-center justify-center mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl flex items-center justify-center mr-4 shadow-md">
-                  <Shield className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center mr-4 shadow-sm">
+                  <Shield className="w-6 h-6 text-gray-600" />
                 </div>
                 <h1 className="text-3xl font-semibold text-gray-900 tracking-tight">{t('upload.title')}</h1>
               </div>
@@ -798,8 +798,8 @@ function App() {
             {/* Left - Project Info */}
             <div className="flex items-center space-x-3">
               <div className="flex items-center space-x-2">
-                <div className={`${i18n.language === 'fr' ? 'w-4 h-4' : 'w-5 h-5'} bg-gray-800 rounded-md flex items-center justify-center`}>
-                  <Shield className={`${i18n.language === 'fr' ? 'w-2 h-2' : 'w-2.5 h-2.5'} text-white`} />
+                <div className={`${i18n.language === 'fr' ? 'w-4 h-4' : 'w-5 h-5'} bg-gray-100 rounded-md flex items-center justify-center`}>
+                  <Shield className={`${i18n.language === 'fr' ? 'w-2 h-2' : 'w-2.5 h-2.5'} text-gray-600`} />
                 </div>
                 <div>
                   <span className={`${i18n.language === 'fr' ? 'text-xs' : 'text-sm'} font-semibold text-gray-800`}>{t('app.title')}</span>

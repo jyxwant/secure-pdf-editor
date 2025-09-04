@@ -48,8 +48,8 @@ export const UserGuide: React.FC = () => {
             return (
               <div key={index} className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-gray-100/50 hover:border-gray-200/50 hover:shadow-md transition-all duration-300 ease-out">
                 <div className="flex items-start space-x-5">
-                  {/* Step number - Apple style */}
-                  <div className="flex-shrink-0 w-10 h-10 bg-gray-900 text-white rounded-full flex items-center justify-center text-sm font-medium shadow-sm">
+                  {/* Step number - Apple style with softer gray */}
+                  <div className="flex-shrink-0 w-10 h-10 bg-gray-600 text-white rounded-full flex items-center justify-center text-sm font-medium shadow-sm">
                     {index + 1}
                   </div>
                   
