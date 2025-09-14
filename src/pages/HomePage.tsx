@@ -10,19 +10,24 @@ import { SEOHead } from '../components/SEO/SEOHead';
 interface HomePageProps {
   onFileSelect: (file: File) => void;
   loading: boolean;
+  withSEO?: boolean;
 }
 
-export function HomePage({ onFileSelect, loading }: HomePageProps) {
+export function HomePage({ onFileSelect, loading, withSEO = true }: HomePageProps) {
   const { t } = useTranslation();
 
   return (
     <>
-      <SEOHead 
-        title={t('app.title')}
-        description={t('upload.description')}
-        keywords="PDF editor, redaction, security, privacy, document protection"
-        canonicalUrl="/"
-      />
+      {withSEO && (
+        <SEOHead 
+          title={t('app.title')}
+          description={t('upload.description')}
+          keywords="PDF editor, redaction, security, privacy, document protection"
+          canonicalUrl="/"
+          lang="en"
+          alternates={{ en: 'https://secureredact.tech/', zh: 'https://secureredact.tech/zh', fr: 'https://secureredact.tech/fr' }}
+        />
+      )}
       <div className="max-w-4xl mx-auto p-6">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-6">

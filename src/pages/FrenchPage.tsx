@@ -11,12 +11,14 @@ export function FrenchPage(props: FrenchPageProps) {
   return (
     <>
       <SEOHead 
-        title="Éditeur PDF Sécurisé - Outil de Caviarité PDF Professionnel"
-        description="Masquez en toute sécurité les informations sensibles, tout le traitement est effectué localement dans le navigateur. Support pour la caviarité de documents PDF et la protection de la confidentialité."
-        keywords="éditeur PDF,caviarité PDF,sécurité document,protection confidentialité,traitement informations sensibles,traitement local"
+        title="Éditeur PDF sécurisé - Outil de caviardage PDF professionnel | Traitement local"
+        description="Outil gratuit de caviardage PDF et de protection de la confidentialité. Traitement 100% local dans le navigateur, aucune mise en ligne. Zones caviardées ou pixelisées, suppression définitive des données. Conforme GDPR/HIPAA."
+        keywords="éditeur PDF,caviardage PDF,sécurité des documents,protection de la confidentialité,traitement local,GDPR,HIPAA"
         canonicalUrl="/fr"
+        lang="fr"
+        alternates={{ en: 'https://secureredact.tech/', zh: 'https://secureredact.tech/zh', fr: 'https://secureredact.tech/fr' }}
       />
-      <HomePage {...props} />
+      <HomePage {...props} withSEO={false} />
     </>
   );
 }

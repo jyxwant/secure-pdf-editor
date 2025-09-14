@@ -1,17 +1,18 @@
-import { I18nTest } from './components/I18nTest';
-import { Analytics } from '@vercel/analytics/react';
-import React, { useCallback, useState, useEffect, useMemo } from 'react';
+// Lazy debug tool to avoid impacting main bundle
+// Lazy load analytics to avoid affecting TTI/LCP
+import React, { useCallback, useState, useEffect, useMemo, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { Shield, FileX, AlertCircle, CheckCircle, RefreshCw, Github } from 'lucide-react';
-import { HomePage } from './pages/HomePage';
-import { EditorPage } from './pages/EditorPage';
-import { FeaturesPage } from './pages/FeaturesPage';
-import { GuidePage } from './pages/GuidePage';
-import { FAQPage } from './pages/FAQPage';
-import { ChinesePage } from './pages/ChinesePage';
-import { FrenchPage } from './pages/FrenchPage';
+const HomePage = lazy(() => import('./pages/HomePage').then(m => ({ default: m.HomePage })));
+const EditorPage = lazy(() => import('./pages/EditorPage').then(m => ({ default: m.EditorPage })));
+const FeaturesPage = lazy(() => import('./pages/FeaturesPage').then(m => ({ default: m.FeaturesPage })));
+const GuidePage = lazy(() => import('./pages/GuidePage').then(m => ({ default: m.GuidePage })));
+const FAQPage = lazy(() => import('./pages/FAQPage').then(m => ({ default: m.FAQPage })));
+const ChinesePage = lazy(() => import('./pages/ChinesePage').then(m => ({ default: m.ChinesePage })));
+const FrenchPage = lazy(() => import('./pages/FrenchPage').then(m => ({ default: m.FrenchPage })));
+const I18nTestLazy = lazy(() => import('./components/I18nTest').then(m => ({ default: m.I18nTest })));
 import { LanguageSelector } from './components/LanguageSelector';
 import { usePDFProcessor, type RedactionRect, type ProcessingProgress } from './hooks/usePDFProcessor';
 import './App.css';
@@ -351,7 +352,11 @@ function AppContent() {
   const debugMode = new URLSearchParams(window.location.search).get('debug') === 'i18n';
   
   if (debugMode) {
-    return <I18nTest />;
+    return (
+      <Suspense fallback={<div className="p-6 text-gray-600">Loading i18n tools...</div>}>
+        <I18nTestLazy />
+      </Suspense>
+    );
   }
 
   if (!isWorkerReady) {
@@ -614,6 +619,7 @@ function AppContent() {
 
       {/* 主要内容区域 - 路由 */}
       <main className="flex-1">
+        <Suspense fallback={<div className="p-6 text-gray-600">Loading...</div>}>
         <Routes>
           <Route path="/" element={
             <HomePage 
@@ -665,6 +671,7 @@ function AppContent() {
             />
           } />
         </Routes>
+        </Suspense>
       </main>
       
       {/* Footer */}
@@ -740,7 +747,9 @@ function AppContent() {
           )}
         </div>
       </footer>
-      <Analytics />
+      <Suspense fallback={null}>
+        <AnalyticsLazy />
+      </Suspense>
     </div>
   );
 }
@@ -754,5 +763,6 @@ function App() {
     </HelmetProvider>
   );
 }
+const AnalyticsLazy = lazy(() => import('@vercel/analytics/react').then(m => ({ default: m.Analytics })));
 
 export default App;

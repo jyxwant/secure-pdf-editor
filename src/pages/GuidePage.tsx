@@ -13,6 +13,8 @@ export function GuidePage() {
         description={t('guide.subtitle')}
         keywords="PDF redaction guide, how to redact PDF, document security tutorial"
         canonicalUrl="/guide"
+        lang="en"
+        alternates={{ en: 'https://secureredact.tech/guide' }}
       />
       <div className="max-w-6xl mx-auto p-6">
         <UserGuide />

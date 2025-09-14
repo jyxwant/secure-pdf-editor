@@ -70,6 +70,8 @@ export function EditorPage(props: EditorPageProps) {
         description="Professional PDF redaction editor with advanced security features. Mark sensitive areas and generate secure documents."
         keywords="PDF editor, redaction tool, document security, sensitive information removal"
         canonicalUrl="/editor"
+        lang="en"
+        alternates={{ en: 'https://secureredact.tech/editor' }}
       />
       <div className="flex flex-col lg:flex-row h-[calc(100vh-3.5rem)]">
         <div className="flex-1 min-h-0">

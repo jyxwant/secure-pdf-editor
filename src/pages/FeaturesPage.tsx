@@ -13,6 +13,8 @@ export function FeaturesPage() {
         description={t('features.subtitle')}
         keywords="PDF redaction features, document security, local processing, privacy protection"
         canonicalUrl="/features"
+        lang="en"
+        alternates={{ en: 'https://secureredact.tech/features' }}
       />
       <div className="max-w-6xl mx-auto p-6">
         <Features />
