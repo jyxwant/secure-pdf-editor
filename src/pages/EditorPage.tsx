@@ -93,7 +93,7 @@ export function EditorPage(props: EditorPageProps) {
         <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-40">
           <div className="flex items-center justify-between px-4 py-2">
             <div className="text-xs text-gray-500">
-              {t('toolbar.marks', { count: totalRedactions })}
+              {t('pdf.marks', { count: totalRedactions })}
             </div>
             <div className="flex space-x-1">
               <button
@@ -128,7 +128,7 @@ export function EditorPage(props: EditorPageProps) {
                 disabled={!totalRedactions || processing}
                 className="px-3 py-1.5 text-xs bg-blue-600 text-white rounded disabled:opacity-50"
               >
-                {processing ? t('action.processing') : t('toolbar.generate')}
+                {processing ? t('action.processing') : t('toolbar.generatePDF')}
               </button>
             </div>
           </div>

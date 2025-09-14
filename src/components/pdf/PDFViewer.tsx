@@ -79,6 +79,7 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({
   const [dragStartPoint, setDragStartPoint] = useState<{ x: number; y: number } | null>(null);
   const [dragStartRect, setDragStartRect] = useState<RedactionRect | null>(null);
   const [viewMode, setViewMode] = useState<'single' | 'thumbnail'>('single'); // 新增视图模式状态
+  const [hoverCursor, setHoverCursor] = useState<string>('');
 
   // 使用useMemo缓存当前页面的标记矩形
   const pageRects = useMemo(() => {
@@ -166,12 +167,18 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({
           ctx.strokeStyle = '#ffffff';
           ctx.lineWidth = 2 / devicePixelRatio;
           
-          // 四个角的手柄
+          // 四个角 + 四边中点的手柄（更易操作）
           const handles = [
+            // 角
             { x: x - handleSize/2, y: y - handleSize/2 }, // 左上
             { x: x + width - handleSize/2, y: y - handleSize/2 }, // 右上
             { x: x - handleSize/2, y: y + height - handleSize/2 }, // 左下
             { x: x + width - handleSize/2, y: y + height - handleSize/2 }, // 右下
+            // 边
+            { x: x + width/2 - handleSize/2, y: y - handleSize/2 }, // 上中
+            { x: x + width/2 - handleSize/2, y: y + height - handleSize/2 }, // 下中
+            { x: x - handleSize/2, y: y + height/2 - handleSize/2 }, // 左中
+            { x: x + width - handleSize/2, y: y + height/2 - handleSize/2 }, // 右中
           ];
           
           handles.forEach(handle => {
@@ -184,10 +191,11 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({
 
     // 绘制临时矩形（仅编辑模式）
     if (!previewMode && includeTemp && tempRect) {
-      const x = tempRect.x;
-      const y = tempRect.y;
-      const width = tempRect.width;
-      const height = tempRect.height;
+      // 使用与固定标记一致的坐标体系（CSS像素）
+      const x = (tempRect.x / tempRect.pageWidth) * displayWidth;
+      const y = (tempRect.y / tempRect.pageHeight) * displayHeight;
+      const width = (tempRect.width / tempRect.pageWidth) * displayWidth;
+      const height = (tempRect.height / tempRect.pageHeight) * displayHeight;
       
       ctx.setLineDash([2 / devicePixelRatio, 2 / devicePixelRatio]);
       ctx.fillStyle = 'rgba(59, 130, 246, 0.2)';
@@ -314,37 +322,47 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({
 
   // 检查是否点击在调整手柄上
   const getResizeHandle = useCallback((coords: { x: number; y: number }, rect: RedactionRect, canvas: HTMLCanvasElement): string | null => {
-    const x = (rect.x / rect.pageWidth) * canvas.width;
-    const y = (rect.y / rect.pageHeight) * canvas.height;
-    const width = (rect.width / rect.pageWidth) * canvas.width;
-    const height = (rect.height / rect.pageHeight) * canvas.height;
-    const handleSize = 8;
-    const tolerance = handleSize;
+    const dpr = window.devicePixelRatio || 1;
+    const displayWidth = canvas.width / dpr;
+    const displayHeight = canvas.height / dpr;
+    const x = (rect.x / rect.pageWidth) * displayWidth;
+    const y = (rect.y / rect.pageHeight) * displayHeight;
+    const width = (rect.width / rect.pageWidth) * displayWidth;
+    const height = (rect.height / rect.pageHeight) * displayHeight;
+    const handleSize = 10; // 更易点中
+    const tol = 4; // 额外容差
 
-    // 检查四个角的手柄
     const handles = [
-      { id: 'nw', x: x - handleSize/2, y: y - handleSize/2 }, // 左上
-      { id: 'ne', x: x + width - handleSize/2, y: y - handleSize/2 }, // 右上
-      { id: 'sw', x: x - handleSize/2, y: y + height - handleSize/2 }, // 左下
-      { id: 'se', x: x + width - handleSize/2, y: y + height - handleSize/2 }, // 右下
+      { id: 'nw', x: x - handleSize/2, y: y - handleSize/2 },
+      { id: 'ne', x: x + width - handleSize/2, y: y - handleSize/2 },
+      { id: 'sw', x: x - handleSize/2, y: y + height - handleSize/2 },
+      { id: 'se', x: x + width - handleSize/2, y: y + height - handleSize/2 },
+      { id: 'n', x: x + width/2 - handleSize/2, y: y - handleSize/2 },
+      { id: 's', x: x + width/2 - handleSize/2, y: y + height - handleSize/2 },
+      { id: 'w', x: x - handleSize/2, y: y + height/2 - handleSize/2 },
+      { id: 'e', x: x + width - handleSize/2, y: y + height/2 - handleSize/2 },
     ];
 
-    for (const handle of handles) {
-      if (coords.x >= handle.x - tolerance/2 && coords.x <= handle.x + handleSize + tolerance/2 &&
-          coords.y >= handle.y - tolerance/2 && coords.y <= handle.y + handleSize + tolerance/2) {
-        return handle.id;
+    for (const h of handles) {
+      if (
+        coords.x >= h.x - tol && coords.x <= h.x + handleSize + tol &&
+        coords.y >= h.y - tol && coords.y <= h.y + handleSize + tol
+      ) {
+        return h.id as string;
       }
     }
-
     return null;
   }, []);
 
   // 检查是否点击在矩形内部（用于拖动）
   const isPointInRect = useCallback((coords: { x: number; y: number }, rect: RedactionRect, canvas: HTMLCanvasElement): boolean => {
-    const x = (rect.x / rect.pageWidth) * canvas.width;
-    const y = (rect.y / rect.pageHeight) * canvas.height;
-    const width = (rect.width / rect.pageWidth) * canvas.width;
-    const height = (rect.height / rect.pageHeight) * canvas.height;
+    const dpr = window.devicePixelRatio || 1;
+    const displayWidth = canvas.width / dpr;
+    const displayHeight = canvas.height / dpr;
+    const x = (rect.x / rect.pageWidth) * displayWidth;
+    const y = (rect.y / rect.pageHeight) * displayHeight;
+    const width = (rect.width / rect.pageWidth) * displayWidth;
+    const height = (rect.height / rect.pageHeight) * displayHeight;
 
     return coords.x >= x && coords.x <= x + width && 
            coords.y >= y && coords.y <= y + height;
@@ -442,15 +460,52 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({
 
     const canvas = overlayCanvasRef.current;
 
+    // 悬停光标反馈（未绘制/拖拽/缩放时）
+    if (!isDrawing && !isDragging && !isResizing) {
+      let cursor = isPanMode ? 'grab' : 'crosshair';
+      const targetRect = pageRects.find(r => r.id === selectedRectId) || pageRects.find(r => isPointInRect(coords, r, canvas));
+      if (targetRect) {
+        const handle = getResizeHandle(coords, targetRect, canvas);
+        if (handle) {
+          const map: Record<string, string> = {
+            nw: 'nwse-resize', se: 'nwse-resize',
+            ne: 'nesw-resize', sw: 'nesw-resize',
+            n: 'ns-resize', s: 'ns-resize',
+            e: 'ew-resize', w: 'ew-resize',
+          };
+          cursor = map[handle] || cursor;
+        } else if (isPointInRect(coords, targetRect, canvas)) {
+          cursor = 'move';
+        }
+      }
+      setHoverCursor(cursor);
+    }
+
     // 处理拖动
     if (isDragging && dragStartPoint && dragStartRect && selectedRectId) {
+      setHoverCursor('grabbing');
       const deltaX = coords.x - dragStartPoint.x;
       const deltaY = coords.y - dragStartPoint.y;
-      
+      const dpr = window.devicePixelRatio || 1;
+      const displayWidth = canvas.width / dpr;
+      const displayHeight = canvas.height / dpr;
+      // 将起始矩形转换为当前显示比例
+      const baseX = (dragStartRect.x / dragStartRect.pageWidth) * displayWidth;
+      const baseY = (dragStartRect.y / dragStartRect.pageHeight) * displayHeight;
+      const baseW = (dragStartRect.width / dragStartRect.pageWidth) * displayWidth;
+      const baseH = (dragStartRect.height / dragStartRect.pageHeight) * displayHeight;
+
+      const nx = Math.max(0, Math.min(displayWidth - baseW, baseX + deltaX));
+      const ny = Math.max(0, Math.min(displayHeight - baseH, baseY + deltaY));
+
       const newRect: RedactionRect = {
         ...dragStartRect,
-        x: Math.max(0, Math.min(canvas.width - dragStartRect.width, dragStartRect.x + deltaX)),
-        y: Math.max(0, Math.min(canvas.height - dragStartRect.height, dragStartRect.y + deltaY))
+        x: nx,
+        y: ny,
+        width: baseW,
+        height: baseH,
+        pageWidth: displayWidth,
+        pageHeight: displayHeight,
       };
 
       // 更新矩形位置
@@ -472,39 +527,76 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({
 
     // 处理调整大小
     if (isResizing && dragStartPoint && dragStartRect && selectedRectId && resizeHandle) {
+      setHoverCursor('grabbing');
       const deltaX = coords.x - dragStartPoint.x;
       const deltaY = coords.y - dragStartPoint.y;
-      
-      let newRect = { ...dragStartRect };
+      const dpr = window.devicePixelRatio || 1;
+      const displayWidth = canvas.width / dpr;
+      const displayHeight = canvas.height / dpr;
+      // 将起始矩形转换为当前显示比例作为基准
+      const baseX = (dragStartRect.x / dragStartRect.pageWidth) * displayWidth;
+      const baseY = (dragStartRect.y / dragStartRect.pageHeight) * displayHeight;
+      const baseW = (dragStartRect.width / dragStartRect.pageWidth) * displayWidth;
+      const baseH = (dragStartRect.height / dragStartRect.pageHeight) * displayHeight;
+
+      let newX = baseX;
+      let newY = baseY;
+      let newW = baseW;
+      let newH = baseH;
       
       switch (resizeHandle) {
         case 'nw': // 左上角
-          newRect.x = Math.max(0, dragStartRect.x + deltaX);
-          newRect.y = Math.max(0, dragStartRect.y + deltaY);
-          newRect.width = Math.max(20, dragStartRect.width - deltaX);
-          newRect.height = Math.max(20, dragStartRect.height - deltaY);
+          newX = Math.max(0, baseX + deltaX);
+          newY = Math.max(0, baseY + deltaY);
+          newW = baseW - (newX - baseX);
+          newH = baseH - (newY - baseY);
           break;
         case 'ne': // 右上角
-          newRect.y = Math.max(0, dragStartRect.y + deltaY);
-          newRect.width = Math.max(20, dragStartRect.width + deltaX);
-          newRect.height = Math.max(20, dragStartRect.height - deltaY);
+          newY = Math.max(0, baseY + deltaY);
+          newW = baseW + deltaX;
+          newH = baseH - (newY - baseY);
           break;
         case 'sw': // 左下角
-          newRect.x = Math.max(0, dragStartRect.x + deltaX);
-          newRect.width = Math.max(20, dragStartRect.width - deltaX);
-          newRect.height = Math.max(20, dragStartRect.height + deltaY);
+          newX = Math.max(0, baseX + deltaX);
+          newW = baseW - (newX - baseX);
+          newH = baseH + deltaY;
           break;
         case 'se': // 右下角
-          newRect.width = Math.max(20, dragStartRect.width + deltaX);
-          newRect.height = Math.max(20, dragStartRect.height + deltaY);
+          newW = baseW + deltaX;
+          newH = baseH + deltaY;
+          break;
+        case 'n':
+          newY = Math.max(0, baseY + deltaY);
+          newH = baseH - (newY - baseY);
+          break;
+        case 's':
+          newH = baseH + deltaY;
+          break;
+        case 'w':
+          newX = Math.max(0, baseX + deltaX);
+          newW = baseW - (newX - baseX);
+          break;
+        case 'e':
+          newW = baseW + deltaX;
           break;
       }
 
-      // 限制在画布边界内
-      newRect.x = Math.max(0, Math.min(canvas.width - newRect.width, newRect.x));
-      newRect.y = Math.max(0, Math.min(canvas.height - newRect.height, newRect.y));
-      newRect.width = Math.min(canvas.width - newRect.x, newRect.width);
-      newRect.height = Math.min(canvas.height - newRect.y, newRect.height);
+      // 限制在画布边界内，并设置最小尺寸
+      const minSize = 12;
+      newW = Math.max(minSize, newW);
+      newH = Math.max(minSize, newH);
+      newX = Math.max(0, Math.min(displayWidth - newW, newX));
+      newY = Math.max(0, Math.min(displayHeight - newH, newY));
+
+      const newRect: RedactionRect = {
+        ...dragStartRect,
+        x: newX,
+        y: newY,
+        width: newW,
+        height: newH,
+        pageWidth: displayWidth,
+        pageHeight: displayHeight,
+      };
 
       // 更新矩形大小
       setRedactionRects(prev => {
@@ -532,8 +624,8 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({
       
       const tempRect: RedactionRect = {
         x, y, width, height,
-        pageWidth: canvas.width, 
-        pageHeight: canvas.height,
+        pageWidth: canvas.width / (window.devicePixelRatio || 1), 
+        pageHeight: canvas.height / (window.devicePixelRatio || 1),
         id: `temp-${Date.now()}`
       };
       
@@ -623,7 +715,37 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
-      
+
+      // 选中矩形时，方向键进行微调（Shift加速）
+      if (!previewMode && selectedRectId && overlayCanvasRef.current) {
+        const canvas = overlayCanvasRef.current;
+        const selected = pageRects.find(r => r.id === selectedRectId);
+        if (selected) {
+          const step = e.shiftKey ? 10 : 1; // CSS像素
+          let moved = false;
+          const newRect = { ...selected };
+          if (e.key === 'ArrowLeft') { newRect.x = Math.max(0, newRect.x - step); moved = true; }
+          if (e.key === 'ArrowRight') { newRect.x = Math.min(selected.pageWidth - newRect.width, newRect.x + step); moved = true; }
+          if (e.key === 'ArrowUp') { newRect.y = Math.max(0, newRect.y - step); moved = true; }
+          if (e.key === 'ArrowDown') { newRect.y = Math.min(selected.pageHeight - newRect.height, newRect.y + step); moved = true; }
+
+          if (moved) {
+            e.preventDefault();
+            setRedactionRects(prev => {
+              const newRects = [...prev];
+              const pageIndex = currentPage - 1;
+              const rectIndex = newRects[pageIndex].findIndex(r => r.id === selectedRectId);
+              if (rectIndex >= 0) {
+                newRects[pageIndex][rectIndex] = newRect;
+              }
+              return newRects;
+            });
+            requestAnimationFrame(() => drawRedactionRects());
+            return; // 不触发页面切换
+          }
+        }
+      }
+
       switch (e.key) {
         case 'ArrowLeft':
           e.preventDefault();
@@ -811,9 +933,8 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({
                   {/* 覆盖Canvas - 标记层 */}
                   <canvas
                     ref={overlayCanvasRef}
-                    className={`absolute top-0 left-0 max-w-full h-auto ${
-                      isPanMode ? 'cursor-grab active:cursor-grabbing' : 'cursor-crosshair'
-                    }`}
+                    className={`absolute top-0 left-0 max-w-full h-auto`}
+                    style={{ cursor: isPanMode ? 'grab' : (hoverCursor || 'crosshair') }}
                     onMouseDown={handleMouseDown}
                     onMouseMove={handleMouseMove}
                     onMouseUp={handleMouseUp}
