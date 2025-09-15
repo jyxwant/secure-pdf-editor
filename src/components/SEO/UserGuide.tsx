@@ -29,38 +29,38 @@ export const UserGuide: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50/50 to-white">
+    <section className="py-16 bg-gray-50/30">
       <div className="max-w-4xl mx-auto px-6">
-        {/* Header - ChatGPT/Apple style */}
+        {/* Header - 简洁标题 */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-semibold text-gray-900 mb-4 tracking-tight">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-3">
             {t('guide.title')}
           </h2>
-          <p className="text-gray-600 text-lg leading-relaxed max-w-2xl mx-auto font-light">
+          <p className="text-gray-600 text-sm max-w-2xl mx-auto">
             {t('guide.subtitle')}
           </p>
         </div>
 
-        {/* Steps - Clean Apple-like design */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        {/* Steps - 简洁卡片布局 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
-              <div key={index} className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-gray-100/50 hover:border-gray-200/50 hover:shadow-md transition-all duration-300 ease-out">
-                <div className="flex items-start space-x-5">
-                  {/* Step number - Apple style with softer gray */}
-                  <div className="flex-shrink-0 w-10 h-10 bg-gray-600 text-white rounded-full flex items-center justify-center text-sm font-medium shadow-sm">
+              <div key={index} className="bg-white rounded-lg p-6 border border-gray-100 hover:border-gray-200 transition-colors duration-200">
+                <div className="flex items-start space-x-4">
+                  {/* Step number */}
+                  <div className="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium">
                     {index + 1}
                   </div>
                   
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center space-x-3 mb-4">
-                      <Icon className="w-5 h-5 text-gray-500" />
-                      <h3 className="text-lg font-medium text-gray-900 tracking-tight">
+                    <div className="flex items-center space-x-3 mb-3">
+                      <Icon className="w-5 h-5 text-gray-400" />
+                      <h3 className="text-base font-medium text-gray-900">
                         {step.title}
                       </h3>
                     </div>
-                    <p className="text-gray-600 leading-relaxed font-light">
+                    <p className="text-sm text-gray-600 leading-relaxed">
                       {step.description}
                     </p>
                   </div>
@@ -70,11 +70,11 @@ export const UserGuide: React.FC = () => {
           })}
         </div>
 
-        {/* Security Info - Minimal Apple style */}
+        {/* Security Info - 极简设计 */}
         <div className="text-center">
-          <div className="inline-flex items-center space-x-3 text-gray-700 bg-white/60 backdrop-blur-sm rounded-full px-6 py-3 border border-gray-100/50 shadow-sm">
-            <div className="w-2.5 h-2.5 bg-green-500 rounded-full shadow-sm"></div>
-            <span className="font-light text-sm tracking-wide">{t('guide.compliance.description')}</span>
+          <div className="inline-flex items-center space-x-2 text-sm text-gray-600 bg-white rounded-full px-4 py-2 border border-gray-100">
+            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+            <span>{t('guide.compliance.description')}</span>
           </div>
         </div>
       </div>

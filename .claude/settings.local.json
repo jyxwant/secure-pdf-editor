@@ -15,13 +15,7 @@
       "Bash(start http://localhost:5175)",
       "Bash(npx tsc:*)",
       "Bash(dir:*)",
-      "WebSearch",
-      "Read(/C:\\Users\\jyx\\Downloads\\secure-pdf-editor\\secure-pdf-editor/**)",
-      "Read(/C:\\Users\\jyx\\Downloads\\secure-pdf-editor\\secure-pdf-editor/**)",
-      "Read(/C:\\Users\\jyx\\Downloads\\secure-pdf-editor\\secure-pdf-editor\\src/**)",
-      "Read(/C:\\Users\\jyx\\Downloads\\secure-pdf-editor\\secure-pdf-editor\\src\\components\\SEO/**)",
-      "Read(/C:\\Users\\jyx\\Downloads\\secure-pdf-editor\\secure-pdf-editor\\src\\components\\SEO/**)",
-      "Read(/C:\\Users\\jyx\\Downloads\\secure-pdf-editor\\secure-pdf-editor\\src\\components\\SEO/**)"
+      "WebSearch"
     ],
     "deny": [],
     "ask": []

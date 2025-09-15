@@ -1,5 +1,9 @@
 import { useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import * as pdfjsLib from 'pdfjs-dist';
+import workerSrc from 'pdfjs-dist/build/pdf.worker.mjs?url';
+pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
+import { PDFDocument, rgb } from 'pdf-lib';
 
 export interface RedactionRect {
   x: number;
@@ -39,32 +43,10 @@ export function usePDFProcessor() {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState<ProcessingProgress | null>(null);
-  const pdfDocRef = useRef<any>(null);
+  const pdfDocRef = useRef<pdfjsLib.PDFDocumentProxy | null>(null);
   const fileDataRef = useRef<ArrayBuffer | null>(null);
   const renderCacheRef = useRef<RenderCache>({});
   const renderPromiseRef = useRef<Promise<any> | null>(null);
-  // Lazy-loaded libraries
-  const pdfjsLibRef = useRef<any>(null);
-  const pdfLibRef = useRef<any>(null);
-
-  const ensurePDFJS = useCallback(async () => {
-    if (!pdfjsLibRef.current) {
-      const lib = await import('pdfjs-dist');
-      const workerModule: any = await import('pdfjs-dist/build/pdf.worker.mjs?url');
-      const workerUrl = workerModule?.default || workerModule;
-      (lib as any).GlobalWorkerOptions.workerSrc = workerUrl;
-      pdfjsLibRef.current = lib;
-    }
-    return pdfjsLibRef.current as typeof import('pdfjs-dist');
-  }, []);
-
-  const ensurePDFLib = useCallback(async () => {
-    if (!pdfLibRef.current) {
-      const lib = await import('pdf-lib');
-      pdfLibRef.current = lib;
-    }
-    return pdfLibRef.current as typeof import('pdf-lib');
-  }, []);
 
   const updateProgress = useCallback((stage: ProcessingProgress['stage'], progress: number, message: string, currentPage?: number, totalPages?: number) => {
     setProgress({ stage, progress, message, currentPage, totalPages });
@@ -98,8 +80,7 @@ export function usePDFProcessor() {
       fileDataRef.current = arrayBufferCopy;
       
       updateProgress('loading', 50, t('progress.parsingPdf'));
-      const pdfjsLib = await ensurePDFJS();
-      const pdfVersion = (pdfjsLib as any).version || '4.8.69';
+      const pdfVersion = pdfjsLib.version;
       const loadingTask = pdfjsLib.getDocument({
         data: arrayBuffer, // 使用原始的 arrayBuffer 给 PDF.js
         cMapUrl: `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfVersion}/cmaps/`,
@@ -317,12 +298,11 @@ export function usePDFProcessor() {
 
   // Canvas截图法 - 最高安全性
   const processWithCanvas = useCallback(async (
-    pdfDoc: any,
+    pdfDoc: pdfjsLib.PDFDocumentProxy,
     redactionRects: RedactionRect[][],
     numPages: number,
     totalRedactions: number
   ): Promise<ProcessingResult> => {
-    const { PDFDocument } = await ensurePDFLib();
     const newPdfDoc = await PDFDocument.create();
     updateProgress('processing', 5, t('progress.creatingDocument'), 0, numPages);
     
@@ -428,12 +408,11 @@ export function usePDFProcessor() {
 
   // 像素化处理法
   const processWithPixelate = useCallback(async (
-    pdfDoc: any,
+    pdfDoc: pdfjsLib.PDFDocumentProxy,
     redactionRects: RedactionRect[][],
     numPages: number,
     totalRedactions: number
   ): Promise<ProcessingResult> => {
-    const { PDFDocument } = await ensurePDFLib();
     const newPdfDoc = await PDFDocument.create();
     updateProgress('processing', 5, t('progress.rebuildPrep'), 0, numPages);
     
@@ -557,7 +536,7 @@ export function usePDFProcessor() {
 
   // PDF重建法 - 真正的PDF结构操作
   const processWithRebuild = useCallback(async (
-    pdfDoc: any,
+    pdfDoc: pdfjsLib.PDFDocumentProxy,
     redactionRects: RedactionRect[][],
     numPages: number,
     totalRedactions: number
@@ -568,7 +547,6 @@ export function usePDFProcessor() {
       throw new Error(t('error.pdfDataNotFound'));
     }
     
-    const { PDFDocument, rgb } = await ensurePDFLib();
     const originalPdfDoc = await PDFDocument.load(fileDataRef.current);
     const newPdfDoc = await PDFDocument.create();
     
