@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 import I18nProvider from '@/components/I18nProvider';
 
@@ -115,6 +116,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <I18nProvider>
           {children}
+          <Analytics />
         </I18nProvider>
       </body>
     </html>
