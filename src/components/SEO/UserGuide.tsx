@@ -29,51 +29,49 @@ export const UserGuide: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-50/30">
-      <div className="max-w-4xl mx-auto px-6">
-        {/* Header - 简洁标题 */}
+    <section className="py-16 bg-[#f0f0f0]">
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-3">
+          <h2 className="text-4xl font-black text-black mb-4 uppercase tracking-tight">
             {t('guide.title')}
           </h2>
-          <p className="text-gray-600 text-sm max-w-2xl mx-auto">
+          <div className="w-24 h-2 bg-pink-400 mx-auto border-2 border-black mb-6"></div>
+          <p className="text-xl text-gray-700 font-bold max-w-2xl mx-auto">
             {t('guide.subtitle')}
           </p>
         </div>
 
-        {/* Steps - 简洁卡片布局 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        {/* Steps */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
-              <div key={index} className="bg-white rounded-lg p-6 border border-gray-100 hover:border-gray-200 transition-colors duration-200">
-                <div className="flex items-start space-x-4">
-                  {/* Step number */}
-                  <div className="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium">
-                    {index + 1}
+              <div key={index} className="neo-box p-6 flex flex-col h-full relative group hover:-translate-y-2 transition-transform duration-200">
+                <div className="absolute -top-4 -left-4 w-10 h-10 bg-black text-white border-2 border-white flex items-center justify-center text-xl font-black shadow-md z-10">
+                  {index + 1}
+                </div>
+                
+                <div className="flex-1 flex flex-col items-center text-center pt-4">
+                  <div className="w-16 h-16 bg-white border-2 border-black rounded-full flex items-center justify-center mb-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                    <Icon className="w-8 h-8 text-black" />
                   </div>
-                  
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center space-x-3 mb-3">
-                      <Icon className="w-5 h-5 text-gray-400" />
-                      <h3 className="text-base font-medium text-gray-900">
-                        {step.title}
-                      </h3>
-                    </div>
-                    <p className="text-sm text-gray-600 leading-relaxed">
-                      {step.description}
-                    </p>
-                  </div>
+                  <h3 className="text-lg font-black text-black mb-3 uppercase">
+                    {step.title}
+                  </h3>
+                  <p className="text-sm text-gray-800 font-medium leading-relaxed">
+                    {step.description}
+                  </p>
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Security Info - 极简设计 */}
+        {/* Security Info */}
         <div className="text-center">
-          <div className="inline-flex items-center space-x-2 text-sm text-gray-600 bg-white rounded-full px-4 py-2 border border-gray-100">
-            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+          <div className="inline-flex items-center space-x-3 text-base font-bold text-black bg-white px-6 py-3 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            <div className="w-3 h-3 bg-green-500 border border-black rounded-full animate-pulse"></div>
             <span>{t('guide.compliance.description')}</span>
           </div>
         </div>

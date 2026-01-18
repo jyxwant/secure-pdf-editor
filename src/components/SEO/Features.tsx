@@ -45,53 +45,52 @@ export const Features: React.FC = () => {
 
   return (
     <section className="py-16 bg-white">
-      <div className="max-w-4xl mx-auto px-6">
-        {/* Header - 简洁标题 */}
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-3">
+          <h2 className="text-4xl font-black text-black mb-4 uppercase tracking-tight">
             {t('features.title')}
           </h2>
-          <p className="text-gray-600 text-sm max-w-2xl mx-auto">
+          <div className="w-24 h-2 bg-yellow-400 mx-auto border-2 border-black mb-6"></div>
+          <p className="text-xl text-gray-700 font-bold max-w-2xl mx-auto">
             {t('features.subtitle')}
           </p>
         </div>
 
-        {/* Main Features - 简洁网格 */}
+        {/* Main Features */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
           {mainFeatures.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <div key={index} className="text-left">
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0 w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-gray-600" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-base font-medium text-gray-900 mb-2">
-                      {feature.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">
-                      {feature.description}
-                    </p>
-                  </div>
+              <div key={index} className="neo-card flex items-start space-x-4 bg-white hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] transition-all duration-200">
+                <div className="flex-shrink-0 w-12 h-12 bg-yellow-300 border-2 border-black flex items-center justify-center">
+                  <Icon className="w-6 h-6 text-black" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-lg font-black text-black mb-2 uppercase">
+                    {feature.title}
+                  </h3>
+                  <p className="text-base text-gray-800 font-medium leading-relaxed">
+                    {feature.description}
+                  </p>
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Use Cases - 简洁列表 */}
-        <div>
-          <h3 className="text-lg font-medium text-gray-900 mb-8 text-center">
+        {/* Use Cases */}
+        <div className="neo-box p-8 bg-blue-50">
+          <h3 className="text-2xl font-black text-black mb-8 text-center uppercase">
             {t('useCases.title')}
           </h3>
-          <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {useCases.map((useCase, index) => (
-              <div key={index} className="border-l-2 border-gray-100 pl-6">
-                <h4 className="text-base font-medium text-gray-900 mb-2">
+              <div key={index} className="border-l-4 border-black pl-6 py-2">
+                <h4 className="text-lg font-black text-black mb-2">
                   {useCase.title}
                 </h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
+                <p className="text-sm text-gray-800 font-bold leading-relaxed">
                   {useCase.description}
                 </p>
               </div>

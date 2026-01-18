@@ -119,7 +119,7 @@ export const SecurityInfo: React.FC = () => {
             {t('securityInfo.methods.title')}
           </h3>
           
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="max-w-2xl mx-auto">
             <div className="bg-white rounded-lg p-6 border border-gray-200">
               <div className="flex items-center mb-4">
                 <div className="p-2 bg-blue-100 rounded-full mr-3">
@@ -135,36 +135,6 @@ export const SecurityInfo: React.FC = () => {
               </p>
               <p className="text-xs text-blue-600 font-medium">
                 {t('securityInfo.methods.canvas.rating')}
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg p-6 border border-gray-200">
-              <div className="flex items-center mb-4">
-                <div className="p-2 bg-purple-100 rounded-full mr-3">
-                  <Shield className="w-5 h-5 text-purple-600" />
-                </div>
-                <h4 className="font-semibold text-gray-900">{t('securityInfo.methods.pixelate.title')}</h4>
-              </div>
-              <p className="text-sm text-gray-600 mb-3">
-                {t('securityInfo.methods.pixelate.desc')}
-              </p>
-              <p className="text-xs text-purple-600 font-medium">
-                {t('securityInfo.methods.pixelate.rating')}
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg p-6 border border-gray-200">
-              <div className="flex items-center mb-4">
-                <div className="p-2 bg-orange-100 rounded-full mr-3">
-                  <Zap className="w-5 h-5 text-orange-600" />
-                </div>
-                <h4 className="font-semibold text-gray-900">{t('securityInfo.methods.rebuild.title')}</h4>
-              </div>
-              <p className="text-sm text-gray-600 mb-3">
-                {t('securityInfo.methods.rebuild.desc')}
-              </p>
-              <p className="text-xs text-orange-600 font-medium">
-                {t('securityInfo.methods.rebuild.rating')}
               </p>
             </div>
           </div>

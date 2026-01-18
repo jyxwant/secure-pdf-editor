@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { Languages } from 'lucide-react';
 
 const languages = [
-  { code: 'en', name: 'English', flag: '🇺🇸' },
-  { code: 'zh', name: '中文', flag: '🇨🇳' },
-  { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  { code: 'en', name: 'English', flag: 'US' },
+  { code: 'zh', name: '中文', flag: 'CN' },
+  { code: 'fr', name: 'Français', flag: 'FR' },
 ];
 
 export const LanguageSelector: React.FC = () => {
@@ -42,7 +42,7 @@ export const LanguageSelector: React.FC = () => {
         aria-haspopup="true"
         aria-expanded={isOpen}
       >
-        <span className="text-base mr-2">{currentLanguage.flag}</span>
+        <span className="text-xs font-bold mr-2 text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">{currentLanguage.flag}</span>
         <span className="inline text-sm font-medium">{currentLanguage.name}</span>
         <svg
           className="ml-2 -mr-1 h-4 w-4 flex-shrink-0"
@@ -86,7 +86,7 @@ export const LanguageSelector: React.FC = () => {
                   `}
                   role="menuitem"
                 >
-                  <span className="mr-3 text-base">{language.flag}</span>
+                  <span className="mr-3 text-xs font-bold text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded w-8 text-center">{language.flag}</span>
                   <span className="flex-1 font-medium">{language.name}</span>
                   {i18n.language === language.code && (
                     <span className="ml-2 text-blue-600 font-bold">✓</span>

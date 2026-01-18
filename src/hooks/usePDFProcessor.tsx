@@ -1,9 +1,11 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as pdfjsLib from 'pdfjs-dist';
-import workerSrc from 'pdfjs-dist/build/pdf.worker.mjs?url';
-pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
 import { PDFDocument, rgb } from 'pdf-lib';
+
+if (typeof window !== 'undefined') {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.mjs';
+}
 
 export interface RedactionRect {
   x: number;
@@ -46,7 +48,7 @@ export function usePDFProcessor() {
   const pdfDocRef = useRef<pdfjsLib.PDFDocumentProxy | null>(null);
   const fileDataRef = useRef<ArrayBuffer | null>(null);
   const renderCacheRef = useRef<RenderCache>({});
-  const renderPromiseRef = useRef<Promise<any> | null>(null);
+  const pendingRendersRef = useRef<Map<string, Promise<any>>>(new Map());
 
   const updateProgress = useCallback((stage: ProcessingProgress['stage'], progress: number, message: string, currentPage?: number, totalPages?: number) => {
     setProgress({ stage, progress, message, currentPage, totalPages });
@@ -155,25 +157,23 @@ export function usePDFProcessor() {
       };
     }
     
-    // 如果正在渲染相同页面，等待完成
-    if (renderPromiseRef.current) {
-      try {
-        await renderPromiseRef.current;
-      } catch (e) {
-        // 忽略错误，继续渲染
-      }
+    // Check if there is a pending render for this specific page and scale
+    if (pendingRendersRef.current.has(cacheKey)) {
+      return pendingRendersRef.current.get(cacheKey);
     }
     
-    setLoading(true);
-    updateProgress('rendering', 0, t('progress.renderingPage', { pageNum }));
+    // Only set global loading if it's the first render to avoid flickering
+    if (pendingRendersRef.current.size === 0) {
+      setLoading(true);
+    }
     
     const renderPromise = (async () => {
       try {
         const page = await pdfDocRef.current!.getPage(pageNum);
-        updateProgress('rendering', 30, t('progress.gettingDimensions'));
+        // updateProgress('rendering', 30, t('progress.gettingDimensions'));
         
         const viewport = page.getViewport({ scale });
-        updateProgress('rendering', 50, t('progress.creatingCanvas'));
+        // updateProgress('rendering', 50, t('progress.creatingCanvas'));
         
         // 创建离屏Canvas进行渲染
         const offscreenCanvas = document.createElement('canvas');
@@ -193,7 +193,7 @@ export function usePDFProcessor() {
         context.fillStyle = '#ffffff';
         context.fillRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
         
-        updateProgress('rendering', 70, t('progress.renderingContent'));
+        // updateProgress('rendering', 70, t('progress.renderingContent'));
         
         const renderContext: any = {
           canvasContext: context,
@@ -207,7 +207,7 @@ export function usePDFProcessor() {
         const renderTask = page.render(renderContext);
         await renderTask.promise;
         
-        updateProgress('rendering', 90, t('progress.extractingImage'));
+        // updateProgress('rendering', 90, t('progress.extractingImage'));
         const imageData = context.getImageData(0, 0, offscreenCanvas.width, offscreenCanvas.height);
         
         // 缓存结果
@@ -220,9 +220,6 @@ export function usePDFProcessor() {
         // 定期清理过期缓存
         clearExpiredCache();
         
-        updateProgress('rendering', 100, t('progress.rendering', { pageNum }));
-        setTimeout(() => setProgress(null), 500);
-        
         return {
           success: true,
           imageData: imageData,
@@ -233,7 +230,6 @@ export function usePDFProcessor() {
         
       } catch (error: any) {
         console.error(`Page ${pageNum} rendering error:`, error);
-        setProgress(null);
         
         let errorMessage = t('error.pageRenderFailed');
         if (error.message) {
@@ -245,12 +241,14 @@ export function usePDFProcessor() {
           error: errorMessage
         };
       } finally {
-        setLoading(false);
-        renderPromiseRef.current = null;
+        if (pendingRendersRef.current.size === 0) {
+            setLoading(false);
+        }
+        pendingRendersRef.current.delete(cacheKey);
       }
     })();
     
-    renderPromiseRef.current = renderPromise;
+    pendingRendersRef.current.set(cacheKey, renderPromise);
     return renderPromise;
   }, [updateProgress, clearExpiredCache]);
 
@@ -366,13 +364,17 @@ export function usePDFProcessor() {
         
         updateProgress('processing', pageProgress + 6, t('progress.convertingToImage', { pageNum }), pageNum, numPages);
         
-        // 使用toBlob而不是toDataURL，性能更好
-        const blob = await new Promise<Blob>((resolve) => {
-          offscreenCanvas.toBlob(resolve!, 'image/png', 1.0);
+        // Use toBlob instead of toDataURL, better performance
+        // Use JPEG with high quality (0.95) to balance size and quality (PNG at 3.0 scale is too large)
+        const blob = await new Promise<Blob>((resolve, reject) => {
+          offscreenCanvas.toBlob((b) => {
+             if (b) resolve(b);
+             else reject(new Error('Canvas to Blob failed'));
+          }, 'image/jpeg', 0.95);
         });
         
         const imageArrayBuffer = await blob!.arrayBuffer();
-        const image = await newPdfDoc.embedPng(imageArrayBuffer);
+        const image = await newPdfDoc.embedJpg(imageArrayBuffer);
         const newPage = newPdfDoc.addPage([offscreenCanvas.width, offscreenCanvas.height]);
         
         newPage.drawImage(image, {
@@ -495,8 +497,11 @@ export function usePDFProcessor() {
         
         updateProgress('processing', pageProgress + 6, t('progress.convertingToImage', { pageNum }), pageNum, numPages);
         
-        const blob = await new Promise<Blob>((resolve) => {
-          offscreenCanvas.toBlob(resolve!, 'image/jpeg', 0.9); // 使用JPEG以减小文件大小
+        const blob = await new Promise<Blob>((resolve, reject) => {
+          offscreenCanvas.toBlob((b) => {
+             if (b) resolve(b);
+             else reject(new Error('Canvas to Blob failed'));
+          }, 'image/jpeg', 0.9); // 使用JPEG以减小文件大小
         });
         
         const imageArrayBuffer = await blob!.arrayBuffer();

@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background-color: #f0f0f0; /* Light gray background for contrast */
+  }
+}
+
+@layer components {
+  .neo-box {
+    @apply border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-white transition-all;
+  }
+  
+  .neo-box-sm {
+    @apply border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] bg-white transition-all;
+  }
+
+  .neo-btn {
+    @apply border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all font-bold px-4 py-2;
+  }
+  
+  .neo-btn-sm {
+    @apply border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] transition-all font-bold px-2 py-1;
+  }
+
+  .neo-btn-primary {
+    @apply bg-[#FFDE00] hover:bg-[#FFE55C] text-black; /* Yellow */
+  }
+
+  .neo-btn-secondary {
+    @apply bg-white hover:bg-gray-50 text-black;
+  }
+
+  .neo-btn-danger {
+    @apply bg-[#FF6B6B] hover:bg-[#FF8787] text-white;
+  }
+  
+  .neo-btn-success {
+    @apply bg-[#4ADE80] hover:bg-[#86EFAC] text-black;
+  }
+
+  .neo-input {
+    @apply border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:outline-none focus:translate-x-[1px] focus:translate-y-[1px] focus:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all p-2;
+  }
+  
+  .neo-card {
+    @apply border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] bg-white p-6;
+  }
+}
+
+@layer utilities {
+  .animate-in {
+    animation-duration: 200ms;
+    animation-fill-mode: both;
+  }
+  
+  .fade-in { animation-name: fadeIn; }
+  .slide-in-from-bottom-4 { animation-name: slideInFromBottom; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInFromBottom {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* PDF Canvas specific */
+canvas {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
