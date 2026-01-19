@@ -118,7 +118,7 @@ export default function RootLayout({
         <I18nProvider>
           {children}
           <Analytics />
-          <SpeedInsights />
+          <SpeedInsights scriptSrc="https://secureredact.tech/_vercel/speed-insights/script.js" />
         </I18nProvider>
       </body>
     </html>
