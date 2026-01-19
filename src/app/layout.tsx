@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import './globals.css';
 import I18nProvider from '@/components/I18nProvider';
 
@@ -117,6 +118,7 @@ export default function RootLayout({
         <I18nProvider>
           {children}
           <Analytics />
+          <SpeedInsights />
         </I18nProvider>
       </body>
     </html>
