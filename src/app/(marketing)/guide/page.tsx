@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { UserGuide } from '@/components/SEO/UserGuide';
 
 export default function GuidePage() {
+  // Page component for /guide route
   const { t } = useTranslation();
   return (
     <div className="py-12 bg-[#f0f0f0] min-h-[calc(100vh-64px-200px)]">

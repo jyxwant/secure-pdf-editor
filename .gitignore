@@ -59,3 +59,4 @@ screenshots/
 # Vite
 .vite/
 out/
+.next/

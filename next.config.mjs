@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  output: 'export', // Force static export as requested for SSG
-  images: {
-    unoptimized: true, // Required for static export
-  },
+  // output: 'export', // Removed for Vercel deployment to support standard routing
+  // images: {
+  //   unoptimized: true, // Not required for Vercel
+  // },
   webpack: (config) => {
     config.resolve.alias.canvas = false;
     return config;
