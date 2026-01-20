@@ -13,8 +13,18 @@ export default function I18nProvider({ children }: { children: ReactNode }) {
 
   // Prevent hydration mismatch by rendering only after mount
   if (!mounted) {
-    return <>{children}</>; 
+    // Return children wrapped in a div with suppressHydrationWarning
+    // This is a common workaround for i18n hydration issues in Next.js
+    return (
+      <div suppressHydrationWarning>
+        {children}
+      </div>
+    );
   }
 
-  return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
+  return (
+    <I18nextProvider i18n={i18n}>
+      {children}
+    </I18nextProvider>
+  );
 }
