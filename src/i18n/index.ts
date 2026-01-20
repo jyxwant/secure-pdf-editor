@@ -181,6 +181,18 @@ const resources = {
       'pdf.marks': '{{count}} marks',
       'pdf.markAreas': 'Marked areas: {{count}}',
       
+      // View
+      'view.thumbnailView': 'Thumbnail View',
+      'view.zoomOut': 'Zoom Out',
+      
+      // Preview Modal
+      'preview.title': 'Preview Effect',
+      'preview.description': 'Review your redactions before finalizing.',
+      'preview.redactionCount': '{{count}} Redactions',
+      'preview.method': 'Method: {{method}}',
+      'preview.continueEdit': 'Continue Editing',
+      'preview.confirmProcess': 'Confirm & Process',
+      
       // Language Selector
       'language.selector': 'Language',
       'language.en': 'English',
@@ -602,6 +614,18 @@ const resources = {
       'pdf.page': '第 {{number}} 页',
       'pdf.marks': '{{count}} 个标记',
       'pdf.markAreas': '标记区域：{{count}} 个',
+
+      // View
+      'view.thumbnailView': '缩略图视图',
+      'view.zoomOut': '缩小',
+
+      // Preview Modal
+      'preview.title': '预览效果',
+      'preview.description': '在完成之前检查您的涂黑效果。',
+      'preview.redactionCount': '{{count}} 处涂黑',
+      'preview.method': '方法：{{method}}',
+      'preview.continueEdit': '继续编辑',
+      'preview.confirmProcess': '确认并处理',
       
       // Language Selector
       'language.selector': '语言',
@@ -1028,6 +1052,18 @@ const resources = {
       'pdf.page': 'Page {{number}}',
       'pdf.marks': '{{count}} marques',
       'pdf.markAreas': 'Zones marquées : {{count}}',
+
+      // View
+      'view.thumbnailView': 'Vue Miniature',
+      'view.zoomOut': 'Zoom Arrière',
+
+      // Preview Modal
+      'preview.title': 'Aperçu de l\'effet',
+      'preview.description': 'Vérifiez vos caviardages avant de finaliser.',
+      'preview.redactionCount': '{{count}} Caviardages',
+      'preview.method': 'Méthode : {{method}}',
+      'preview.continueEdit': 'Continuer l\'édition',
+      'preview.confirmProcess': 'Confirmer et Traiter',
       
       // Language Selector
       'language.selector': 'Langue',

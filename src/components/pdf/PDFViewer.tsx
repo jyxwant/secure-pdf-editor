@@ -187,7 +187,6 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({
                     <button onClick={handleZoomIn} className="neo-btn-sm bg-white hover:bg-gray-100"><ZoomIn className="w-4 h-4" /></button>
                     <button onClick={handleResetZoom} className="neo-btn-sm bg-white hover:bg-gray-100 hidden sm:flex"><RotateCcw className="w-4 h-4" /></button>
                     <button onClick={handleFitWidth} className="neo-btn-sm bg-white hover:bg-gray-100 hidden sm:flex"><Maximize2 className="w-4 h-4" /></button>
-                    <button onClick={() => setIsPanMode(!isPanMode)} className={`neo-btn-sm ${isPanMode ? 'bg-black text-white' : 'bg-white hover:bg-gray-100'} hidden sm:flex`}><Move className="w-4 h-4" /></button>
                 </>
             )}
         </div>
