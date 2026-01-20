@@ -193,12 +193,12 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({
       </div>
 
       <div className="flex-1 overflow-hidden relative bg-gray-100">
-        <div 
-            ref={containerRef} 
-            className="absolute inset-0 overflow-auto flex flex-col items-center py-8 px-4"
-            onScroll={handleScroll}
-        >
-          {viewMode === 'single' ? (
+        {viewMode === 'single' ? (
+          <div 
+              ref={containerRef} 
+              className="absolute inset-0 overflow-auto flex flex-col items-center py-8 px-4"
+              onScroll={handleScroll}
+          >
               <div className="flex flex-col gap-8">
                   {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
                       <div key={pageNum} ref={(el) => { pageRefs.current[pageNum - 1] = el; }}>
@@ -219,18 +219,20 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({
                       </div>
                   ))}
               </div>
-          ) : (
-              <ThumbnailView 
-                  file={file} 
-                  onRenderPage={onRenderPage} 
-                  redactionRects={redactionRects} 
-                  currentPage={currentPage} 
-                  totalPages={totalPages} 
-                  onPageChange={(page) => { onPageChange(page); setViewMode('single'); }} 
-                  loading={loading}
-              />
-          )}
-        </div>
+          </div>
+        ) : (
+          <div className="absolute inset-0 overflow-hidden">
+            <ThumbnailView 
+                file={file} 
+                onRenderPage={onRenderPage} 
+                redactionRects={redactionRects} 
+                currentPage={currentPage} 
+                totalPages={totalPages} 
+                onPageChange={(page) => { onPageChange(page); setViewMode('single'); }} 
+                loading={loading}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

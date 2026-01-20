@@ -27,7 +27,7 @@ export const ThumbnailView: React.FC<ThumbnailViewProps> = ({
   previewMode = false
 }) => {
   const { t } = useTranslation();
-  const [scale, setScale] = useState(1.2);
+  const [scale, setScale] = useState(1.5);
   const [thumbnails, setThumbnails] = useState<Map<number, { url: string; hash: string }>>(new Map());
   const [renderingPages, setRenderingPages] = useState<Set<number>>(new Set());
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -266,9 +266,9 @@ export const ThumbnailView: React.FC<ThumbnailViewProps> = ({
   }, [currentPage]);
 
   // 简化的缩放控制
-  const handleZoomIn = () => setScale(prev => Math.min(prev + 0.2, 2.0));
-  const handleZoomOut = () => setScale(prev => Math.max(prev - 0.2, 0.6));
-  const handleResetZoom = () => setScale(1.2);
+  const handleZoomIn = () => setScale(prev => Math.min(prev + 0.2, 2.5));
+  const handleZoomOut = () => setScale(prev => Math.max(prev - 0.2, 0.8));
+  const handleResetZoom = () => setScale(1.5);
 
   // 优化的页面点击处理 - 直接调用父组件传入的onPageChange
   const handlePageClick = useCallback((pageNum: number) => {
@@ -319,12 +319,12 @@ export const ThumbnailView: React.FC<ThumbnailViewProps> = ({
       {/* Thumbnail grid */}
       <div 
         ref={scrollContainerRef}
-        className="flex-1 overflow-auto p-4 scroll-smooth"
+        className="flex-1 overflow-auto p-6 scroll-smooth bg-gray-100"
       >
         <div 
-          className="grid gap-4 transition-all duration-200 ease-out"
+          className="grid gap-6 transition-all duration-200 ease-out"
           style={{
-            gridTemplateColumns: `repeat(auto-fill, minmax(${Math.max(120 * scale, 80)}px, 1fr))`
+            gridTemplateColumns: `repeat(auto-fill, minmax(${Math.max(140 * scale, 120)}px, 1fr))`
           }}
         >
           {Array.from({ length: totalPages }, (_, i) => i + 1).map(pageNum => {
