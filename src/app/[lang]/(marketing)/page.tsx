@@ -9,7 +9,8 @@ import { UserGuide } from '@/components/SEO/UserGuide';
 import { FAQ } from '@/components/SEO/FAQ';
 
 export default function LandingPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language || 'en';
 
   return (
     <div className="flex flex-col min-h-screen bg-[#f0f0f0]">
@@ -46,7 +47,7 @@ export default function LandingPage() {
           
           <div className="mt-10 flex justify-center gap-4">
             <Link 
-              href="/editor" 
+              href={`/${currentLang}/editor`}
               className="neo-btn neo-btn-primary text-lg px-8 py-4 flex items-center group"
             >
               {t('hero.startRedacting')}
@@ -107,7 +108,7 @@ export default function LandingPage() {
           {t('hero.cta.title')}
         </h2>
         <Link 
-          href="/editor" 
+          href={`/${currentLang}/editor`}
           className="neo-btn bg-white hover:bg-gray-100 text-black text-xl px-10 py-4 inline-flex items-center"
         >
           {t('hero.cta.button')}

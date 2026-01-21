@@ -9,7 +9,8 @@ interface FAQItem {
 }
 
 export const FAQ: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language || 'en';
   const [openItems, setOpenItems] = useState<number[]>([0]);
 
   const toggleItem = (index: number) => {
@@ -105,7 +106,7 @@ export const FAQ: React.FC = () => {
         {/* Call to Action */}
         <div className="text-center mt-12 pt-8">
           <Link 
-            href="/editor"
+            href={`/${currentLang}/editor`}
             className="neo-btn bg-black text-white hover:bg-gray-800 inline-flex items-center text-lg px-8 py-3"
           >
             {t('faq.cta.button')}

@@ -41,11 +41,12 @@ const AuthorBox: React.FC<{ author: string, date: string, reviewer?: string }> =
 };
 
 export default function BlogPost1() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language || 'en';
   
   return (
     <div className="max-w-4xl mx-auto px-6 py-12 bg-white min-h-screen">
-      <Link href="/blog" className="inline-flex items-center text-gray-600 hover:text-black mb-8 font-bold group">
+      <Link href={`/${currentLang}/blog`} className="inline-flex items-center text-gray-600 hover:text-black mb-8 font-bold group">
         <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" /> {t('blog.backToBlog')}
       </Link>
       

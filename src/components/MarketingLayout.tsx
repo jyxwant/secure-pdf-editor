@@ -12,7 +12,19 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const isActive = (path: string) => pathname === path || (path !== '/' && pathname.startsWith(path));
+  const getLocalizedPath = (path: string) => {
+    if (path.startsWith('http')) return path;
+    const currentLang = i18n.language || 'en';
+    // Remove existing locale prefix if present (in case of double prefixing issues, though unlikely here)
+    // Actually, just prepending is fine if we assume 'path' is the clean path.
+    // But 'path' in navLinks are '/guide', etc.
+    return `/${currentLang}${path === '/' ? '' : path}`;
+  };
+
+  const isActive = (path: string) => {
+    const localizedPath = getLocalizedPath(path);
+    return pathname === localizedPath || (path !== '/' && pathname.startsWith(localizedPath));
+  };
 
   const navLinks = [
     { path: '/', label: t('nav.home') },
@@ -33,7 +45,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <Link href="/" className="flex items-center group">
+              <Link href={getLocalizedPath('/')} className="flex items-center group">
                 <div className="neo-box-sm p-1 mr-3 flex items-center justify-center bg-blue-600 border-black border-2">
                   <Shield className="w-6 h-6 text-white" />
                 </div>
@@ -46,7 +58,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
-                  href={link.path}
+                  href={getLocalizedPath(link.path)}
                   className={`px-4 py-2 text-sm font-bold border-2 border-transparent hover:border-black hover:bg-yellow-200 transition-all ${
                     isActive(link.path) ? 'bg-yellow-300 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]' : 'text-gray-600'
                   }`}
@@ -88,7 +100,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
-                  href={link.path}
+                  href={getLocalizedPath(link.path)}
                   onClick={() => setIsMenuOpen(false)}
                   className={`block px-3 py-2 text-base font-bold border-2 border-transparent ${
                     isActive(link.path)
@@ -140,7 +152,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
               {footerLinks.map((link) => (
                 <Link
                   key={link.path}
-                  href={link.path}
+                  href={getLocalizedPath(link.path)}
                   className="text-sm font-bold text-gray-600 hover:text-black hover:underline decoration-2 underline-offset-4 transition-all"
                 >
                   {link.label}

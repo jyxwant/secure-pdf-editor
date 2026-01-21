@@ -14,7 +14,7 @@ type ViewState = 'upload' | 'editor';
 type RedactionMethod = 'canvas' | 'pixelate';
 
 export default function EditorPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   
   // State Management
   const [viewState, setViewState] = useState<ViewState>('upload');
@@ -486,7 +486,7 @@ export default function EditorPage() {
              </div>
              <div className="max-w-4xl w-full">
                 <div className="text-center mb-8">
-                  <Link href="/" className="inline-flex items-center text-gray-500 hover:text-black mb-6 font-bold transition-colors">
+                  <Link href={`/${i18n.language || 'en'}`} className="inline-flex items-center text-gray-500 hover:text-black mb-6 font-bold transition-colors">
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     {t('app.back')}
                   </Link>

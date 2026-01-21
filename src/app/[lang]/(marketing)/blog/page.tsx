@@ -6,7 +6,8 @@ import { Calendar, User, CheckCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export default function BlogPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language || 'en';
   const posts = [
     {
       id: 'how-to-redact-pdf',
@@ -42,7 +43,7 @@ export default function BlogPage() {
               <span className="flex items-center font-bold"><User className="w-4 h-4 mr-1" /> {post.author}</span>
             </div>
             <h2 className="text-3xl font-black mb-4">
-              <Link href={`/blog/${post.id}`} className="text-black hover:text-blue-600 transition-colors">
+              <Link href={`/${currentLang}/blog/${post.id}`} className="text-black hover:text-blue-600 transition-colors">
                 {post.title}
               </Link>
             </h2>
@@ -51,7 +52,7 @@ export default function BlogPage() {
             </p>
             <div className="flex items-center justify-between">
               <Link 
-                href={`/blog/${post.id}`} 
+                href={`/${currentLang}/blog/${post.id}`} 
                 className="neo-btn-sm bg-black text-white hover:bg-gray-800"
               >
                 {t('blog.readArticle')}

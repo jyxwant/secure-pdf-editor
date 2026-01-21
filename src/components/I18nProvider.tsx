@@ -4,8 +4,13 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from '../i18n';
 import { ReactNode, useEffect, useState } from 'react';
 
-export default function I18nProvider({ children }: { children: ReactNode }) {
+export default function I18nProvider({ children, locale }: { children: ReactNode; locale: string }) {
   const [mounted, setMounted] = useState(false);
+
+  // Sync language with locale prop
+  if (i18n.language !== locale) {
+    i18n.changeLanguage(locale);
+  }
 
   useEffect(() => {
     setMounted(true);

@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import './globals.css';
+import '../../globals.css';
 import I18nProvider from '@/components/I18nProvider';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -12,6 +12,10 @@ export const viewport: Viewport = {
   initialScale: 1,
   themeColor: '#ffffff',
 };
+
+export async function generateStaticParams() {
+  return [{ lang: 'en' }, { lang: 'zh' }, { lang: 'fr' }];
+}
 
 export const metadata: Metadata = {
   title: 'Free PDF Redaction Tool - Secure Online PDF Editor | Remove Sensitive Data | SecureRedact',
@@ -38,9 +42,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://secureredact.tech/',
     languages: {
-      'en': 'https://secureredact.tech/',
-      'zh': 'https://secureredact.tech/?lang=zh',
-      'fr': 'https://secureredact.tech/?lang=fr',
+      'en': 'https://secureredact.tech/en',
+      'zh': 'https://secureredact.tech/zh',
+      'fr': 'https://secureredact.tech/fr',
       'x-default': 'https://secureredact.tech/',
     },
   },
@@ -50,18 +54,17 @@ export const metadata: Metadata = {
       { url: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><path d='M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z' fill='%232563eb'/><path d='M9 12L11 14L15 10' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>" },
     ],
   },
-  other: {
-    'content-language': 'en',
-  },
 };
 
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { lang: string };
 }) {
   return (
-    <html lang="en">
+    <html lang={params.lang}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://vitals.vercel-analytics.com" />
@@ -115,7 +118,7 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        <I18nProvider>
+        <I18nProvider locale={params.lang}>
           {children}
           <Analytics />
           <SpeedInsights scriptSrc="https://secureredact.tech/_vercel/speed-insights/script.js" />

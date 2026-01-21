@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Languages } from 'lucide-react';
+import { useRouter, usePathname } from 'next/navigation';
 
 const languages = [
   { code: 'en', name: 'English', flag: 'US' },
@@ -11,9 +12,21 @@ const languages = [
 export const LanguageSelector: React.FC = () => {
   const { i18n, t } = useTranslation();
   const [isOpen, setIsOpen] = React.useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const handleLanguageChange = (languageCode: string) => {
-    i18n.changeLanguage(languageCode);
+    const segments = pathname.split('/');
+    // segments[0] is empty string because path starts with /
+    // segments[1] is the locale
+    if (segments.length > 1) {
+        segments[1] = languageCode;
+        const newPath = segments.join('/');
+        router.push(newPath);
+    } else {
+        // Fallback if path is weird
+        router.push(`/${languageCode}`);
+    }
     setIsOpen(false);
   };
 
