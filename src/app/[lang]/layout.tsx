@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import '../../globals.css';
+import '../globals.css';
 import I18nProvider from '@/components/I18nProvider';
 
 const inter = Inter({ subsets: ['latin'] });
