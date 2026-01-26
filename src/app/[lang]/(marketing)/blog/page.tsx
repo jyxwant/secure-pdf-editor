@@ -8,7 +8,8 @@ import { useTranslation } from 'react-i18next';
 export default function BlogPage() {
   const { t, i18n } = useTranslation();
   const currentLang = i18n.language || 'en';
-  const posts = [
+  
+  const basePosts = [
     {
       id: 'how-to-redact-pdf',
       title: t('blog.post1.title'),
@@ -26,6 +27,20 @@ export default function BlogPage() {
       tags: ['Comparison', 'Tools']
     }
   ];
+
+  const posts = [...basePosts];
+
+  // Add English-only technical post
+  if (currentLang === 'en') {
+    posts.unshift({
+      id: 'how-to-black-out-ssn-on-pdf',
+      title: 'Architecting Secure Document Workflows: A Technical Guide to SSN Redaction',
+      excerpt: 'A technical deep-dive into why standard redaction fails and how WebAssembly enables true data sanitization in the browser.',
+      date: 'Jan 26, 2026',
+      author: 'Security Team',
+      tags: ['Technical', 'Deep Dive']
+    });
+  }
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-12 bg-white min-h-screen">
