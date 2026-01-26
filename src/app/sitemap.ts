@@ -11,6 +11,7 @@ type RouteConfig = {
   lastModified: string; // 必须明确指定时间，避免每次生成都变动
   changeFrequency: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
   priority: number;
+  languages?: string[]; // 可选：指定该页面支持的语言，如果不填则默认支持所有语言
 };
 
 // 页面配置列表
@@ -76,7 +77,8 @@ const routeConfigs: RouteConfig[] = [
     path: '/blog/how-to-black-out-ssn-on-pdf',
     lastModified: '2026-01-26',
     changeFrequency: 'monthly',
-    priority: 0.8
+    priority: 0.8,
+    languages: ['en']
   },
   
   // 法律页面
@@ -104,7 +106,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const sitemap: MetadataRoute.Sitemap = [];
 
   routeConfigs.forEach((config) => {
-    languages.forEach((lang) => {
+    const targetLanguages = config.languages || languages;
+    targetLanguages.forEach((lang) => {
       sitemap.push({
         url: `${baseUrl}/${lang}${config.path}`,
         lastModified: new Date(config.lastModified),
