@@ -71,6 +71,13 @@ const routeConfigs: RouteConfig[] = [
     changeFrequency: 'monthly', 
     priority: 0.8 
   },
+  // English-only technical post
+  {
+    path: '/blog/how-to-black-out-ssn-on-pdf',
+    lastModified: '2026-01-26',
+    changeFrequency: 'monthly',
+    priority: 0.8
+  },
   
   // 法律页面
   { 
