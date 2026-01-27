@@ -80,6 +80,13 @@ const routeConfigs: RouteConfig[] = [
     priority: 0.8,
     languages: ['en']
   },
+  {
+    path: '/blog/adobe-acrobat-free-alternative-2026',
+    lastModified: '2026-01-27',
+    changeFrequency: 'monthly',
+    priority: 0.8,
+    languages: ['en']
+  },
   
   // 法律页面
   { 

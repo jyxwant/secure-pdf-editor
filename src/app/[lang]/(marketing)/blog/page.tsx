@@ -30,8 +30,9 @@ export default function BlogPage() {
 
   const posts = [...basePosts];
 
-  // Add English-only technical post
+  // Add English-only technical posts
   if (currentLang === 'en') {
+    // Add Jan 26 post
     posts.unshift({
       id: 'how-to-black-out-ssn-on-pdf',
       title: 'Architecting Secure Document Workflows: A Technical Guide to SSN Redaction',
@@ -40,6 +41,17 @@ export default function BlogPage() {
       author: 'Security Team',
       tags: ['Technical', 'Deep Dive']
     });
+
+    // Add Jan 27 post (Newest first)
+    posts.unshift({
+      id: 'adobe-acrobat-free-alternative-2026',
+      title: 'The Engineering Guide to Zero-Trust PDF Redaction: Optimization, Privacy, and Tool Selection',
+      excerpt: 'Explore why client-side WASM redaction is the superior alternative to Adobe Acrobat. A technical guide on data privacy, software bloat, and zero-trust workflows.',
+      date: 'Jan 27, 2026',
+      author: 'Engineering Team',
+      tags: ['Engineering', 'Zero-Trust']
+    });
+  }
   }
 
   return (
