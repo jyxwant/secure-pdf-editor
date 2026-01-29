@@ -1,62 +1,64 @@
-'use client';
-
-import React from 'react';
 import Link from 'next/link';
-import { Calendar, User, CheckCircle } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { Calendar, User } from 'lucide-react';
+import { resources } from '@/i18n/resources';
+import { Metadata } from 'next';
+
+const t = resources.en.translation;
+
+export const metadata: Metadata = {
+  title: t['meta.title.blog'],
+  description: t['blog.subtitle'],
+  alternates: {
+    canonical: 'https://secureredact.tech/blog',
+    languages: {
+      'en': 'https://secureredact.tech/blog',
+      'zh': 'https://secureredact.tech/zh/blog',
+      'fr': 'https://secureredact.tech/fr/blog',
+      'x-default': 'https://secureredact.tech/blog',
+    },
+  },
+};
 
 export default function BlogPage() {
-  const { t, i18n } = useTranslation();
-  const currentLang = i18n.language || 'en';
-  
-  const basePosts = [
+  const posts = [
     {
-      id: 'how-to-redact-pdf',
-      title: t('blog.post1.title'),
-      excerpt: t('blog.post1.excerpt'),
-      date: 'Jan 15, 2026',
-      author: 'Security Team',
-      tags: ['Tutorial', 'Security']
-    },
-    {
-      id: 'redact-pdf-free',
-      title: t('blog.post2.title'),
-      excerpt: t('blog.post2.excerpt'),
-      date: 'Jan 10, 2026',
-      author: 'Editor',
-      tags: ['Comparison', 'Tools']
-    }
-  ];
-
-  const posts = [...basePosts];
-
-  // Add English-only technical posts
-  if (currentLang === 'en') {
-    // Add Jan 26 post
-    posts.unshift({
-      id: 'how-to-black-out-ssn-on-pdf',
-      title: 'Architecting Secure Document Workflows: A Technical Guide to SSN Redaction',
-      excerpt: 'A technical deep-dive into why standard redaction fails and how WebAssembly enables true data sanitization in the browser.',
-      date: 'Jan 26, 2026',
-      author: 'Security Team',
-      tags: ['Technical', 'Deep Dive']
-    });
-
-    // Add Jan 27 post (Newest first)
-    posts.unshift({
       id: 'adobe-acrobat-free-alternative-2026',
       title: 'The Engineering Guide to Zero-Trust PDF Redaction: Optimization, Privacy, and Tool Selection',
       excerpt: 'Explore why client-side WASM redaction is the superior alternative to Adobe Acrobat. A technical guide on data privacy, software bloat, and zero-trust workflows.',
       date: 'Jan 27, 2026',
       author: 'Engineering Team',
       tags: ['Engineering', 'Zero-Trust']
-    });
-  }
+    },
+    {
+      id: 'how-to-black-out-ssn-on-pdf',
+      title: 'Architecting Secure Document Workflows: A Technical Guide to SSN Redaction',
+      excerpt: 'A technical deep-dive into why standard redaction fails and how WebAssembly enables true data sanitization in the browser.',
+      date: 'Jan 26, 2026',
+      author: 'Security Team',
+      tags: ['Technical', 'Deep Dive']
+    },
+    {
+      id: 'how-to-redact-pdf',
+      title: t['blog.post1.title'],
+      excerpt: t['blog.post1.excerpt'],
+      date: 'Jan 15, 2026',
+      author: 'Security Team',
+      tags: ['Tutorial', 'Security']
+    },
+    {
+      id: 'redact-pdf-free',
+      title: t['blog.post2.title'],
+      excerpt: t['blog.post2.excerpt'],
+      date: 'Jan 10, 2026',
+      author: 'Editor',
+      tags: ['Comparison', 'Tools']
+    }
+  ];
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-12 bg-white min-h-screen">
-      <h1 className="text-5xl font-black text-black mb-4 uppercase tracking-tight">{t('blog.title')}</h1>
-      <p className="text-xl text-gray-600 mb-12 font-bold">{t('blog.subtitle')}</p>
+      <h1 className="text-5xl font-black text-black mb-4 uppercase tracking-tight">{t['blog.title']}</h1>
+      <p className="text-xl text-gray-600 mb-12 font-bold">{t['blog.subtitle']}</p>
       
       <div className="grid gap-12">
         {posts.map(post => (
@@ -69,7 +71,7 @@ export default function BlogPage() {
               <span className="flex items-center font-bold"><User className="w-4 h-4 mr-1" /> {post.author}</span>
             </div>
             <h2 className="text-3xl font-black mb-4">
-              <Link href={`/${currentLang}/blog/${post.id}`} className="text-black hover:text-blue-600 transition-colors">
+              <Link href={`/blog/${post.id}`} className="text-black hover:text-blue-600 transition-colors">
                 {post.title}
               </Link>
             </h2>
@@ -78,10 +80,10 @@ export default function BlogPage() {
             </p>
             <div className="flex items-center justify-between">
               <Link 
-                href={`/${currentLang}/blog/${post.id}`} 
+                href={`/blog/${post.id}`} 
                 className="neo-btn-sm bg-black text-white hover:bg-gray-800"
               >
-                {t('blog.readArticle')}
+                {t['blog.readArticle']}
               </Link>
               <div className="flex space-x-2">
                 {post.tags.map(tag => (

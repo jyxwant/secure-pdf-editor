@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/post-build.cjs",
     "start": "next start",
     "lint": "next lint",
     "test": "playwright test",

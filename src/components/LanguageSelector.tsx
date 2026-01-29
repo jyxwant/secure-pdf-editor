@@ -15,18 +15,51 @@ export const LanguageSelector: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const handleLanguageChange = (languageCode: string) => {
+  // Configuration for blog post availability
+  const blogPostAvailability: Record<string, string[]> = {
+    'how-to-redact-pdf': ['en', 'zh', 'fr'],
+    'redact-pdf-free': ['en', 'zh', 'fr'],
+    'how-to-black-out-ssn-on-pdf': ['en'],
+    'adobe-acrobat-free-alternative-2026': ['en'],
+  };
+
+  const getTargetUrl = (targetLang: string) => {
+    // 1. Get pure path (remove locale prefix)
+    let purePath = pathname;
+    const supportedLocales = ['zh', 'fr'];
     const segments = pathname.split('/');
     // segments[0] is empty string because path starts with /
-    // segments[1] is the locale
-    if (segments.length > 1) {
-        segments[1] = languageCode;
-        const newPath = segments.join('/');
-        router.push(newPath);
-    } else {
-        // Fallback if path is weird
-        router.push(`/${languageCode}`);
+    const firstSegment = segments[1];
+
+    if (supportedLocales.includes(firstSegment)) {
+      purePath = '/' + segments.slice(2).join('/');
     }
+
+    // 2. Check if it is a blog post
+    // Matches /blog/slug and /blog/slug/ (optional trailing slash)
+    const blogMatch = purePath.match(/^\/blog\/([^/]+)\/?$/);
+    if (blogMatch) {
+      const slug = blogMatch[1];
+      const availableLangs = blogPostAvailability[slug];
+      
+      // If we know about this post and it's NOT available in the target language
+      if (availableLangs && !availableLangs.includes(targetLang)) {
+        // Fallback to the blog index of the target language
+        return targetLang === 'en' ? '/blog' : `/${targetLang}/blog`;
+      }
+    }
+
+    // 3. Default behavior for symmetric routes
+    if (targetLang === 'en') {
+      return purePath;
+    } else {
+      return purePath === '/' ? `/${targetLang}` : `/${targetLang}${purePath}`;
+    }
+  };
+
+  const handleLanguageChange = (languageCode: string) => {
+    const targetUrl = getTargetUrl(languageCode);
+    router.push(targetUrl);
     setIsOpen(false);
   };
 
@@ -45,6 +78,34 @@ export const LanguageSelector: React.FC = () => {
     return languages.find(lang => lang.code === 'en') || languages[0];
   };
 
+  const getAvailableLanguages = () => {
+    // 1. Get pure path (remove locale prefix)
+    let purePath = pathname;
+    const supportedLocales = ['zh', 'fr'];
+    const segments = pathname.split('/');
+    const firstSegment = segments[1];
+
+    if (supportedLocales.includes(firstSegment)) {
+      purePath = '/' + segments.slice(2).join('/');
+    }
+
+    // 2. Check if it is a blog post
+    // Matches /blog/slug and /blog/slug/ (optional trailing slash)
+    const blogMatch = purePath.match(/^\/blog\/([^/]+)\/?$/);
+    if (blogMatch) {
+      const slug = blogMatch[1];
+      const availableLangs = blogPostAvailability[slug];
+      
+      if (availableLangs) {
+        return languages.filter(lang => availableLangs.includes(lang.code));
+      }
+    }
+
+    // Default: return all languages
+    return languages;
+  };
+
+  const availableLanguages = getAvailableLanguages();
   const currentLanguage = getCurrentLanguage();
 
   return (
@@ -86,7 +147,7 @@ export const LanguageSelector: React.FC = () => {
               <div className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-100">
                 {t('language.selector')}
               </div>
-              {languages.map((language) => (
+              {availableLanguages.map((language) => (
                 <button
                   key={language.code}
                   onClick={() => handleLanguageChange(language.code)}

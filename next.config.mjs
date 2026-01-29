@@ -1,10 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // output: 'export', // Removed for Vercel deployment to support standard routing
-  // images: {
-  //   unoptimized: true, // Not required for Vercel
-  // },
+  output: 'export',
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
   webpack: (config) => {
     config.resolve.alias.canvas = false;
     return config;

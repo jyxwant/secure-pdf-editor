@@ -15,9 +15,12 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
   const getLocalizedPath = (path: string) => {
     if (path.startsWith('http')) return path;
     const currentLang = i18n.language || 'en';
-    // Remove existing locale prefix if present (in case of double prefixing issues, though unlikely here)
-    // Actually, just prepending is fine if we assume 'path' is the clean path.
-    // But 'path' in navLinks are '/guide', etc.
+    
+    // 如果是默认语言 'en'，直接返回原始路径，不加前缀
+    if (currentLang === 'en') {
+      return path;
+    }
+
     return `/${currentLang}${path === '/' ? '' : path}`;
   };
 

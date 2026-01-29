@@ -1,13 +1,45 @@
-'use client';
-
-import React from 'react';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, User, CheckCircle } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import { FAQ } from '@/components/SEO/FAQ';
 
-const AuthorBox: React.FC<{ author: string, date: string, reviewer?: string }> = ({ author, date, reviewer }) => {
-  const { t } = useTranslation();
+export const metadata: Metadata = {
+  title: 'How to Black Out SSN on PDF Securely: The 2026 Technical Guide',
+  description: 'Learn the difference between masking and true redaction. A step-by-step guide to permanently removing Social Security Numbers from PDF files using client-side tools.',
+  alternates: {
+    canonical: 'https://secureredact.tech/blog/how-to-black-out-ssn-on-pdf',
+    languages: {
+      'en': 'https://secureredact.tech/blog/how-to-black-out-ssn-on-pdf',
+      'zh': 'https://secureredact.tech/zh/blog/how-to-black-out-ssn-on-pdf',
+      'fr': 'https://secureredact.tech/fr/blog/how-to-black-out-ssn-on-pdf',
+      'x-default': 'https://secureredact.tech/blog/how-to-black-out-ssn-on-pdf',
+    },
+  },
+  openGraph: {
+    title: 'How to Black Out SSN on PDF Securely: The 2026 Technical Guide',
+    description: 'Learn the difference between masking and true redaction. A step-by-step guide to permanently removing Social Security Numbers from PDF files using client-side tools.',
+    url: 'https://secureredact.tech/blog/how-to-black-out-ssn-on-pdf',
+    type: 'article',
+    publishedTime: '2026-01-26',
+    authors: ['Security Team'],
+    images: [
+      {
+        url: 'https://secureredact.tech/images/blog/how-to-black-out-ssn-on-pdf/visual_0.webp',
+        width: 1200,
+        height: 630,
+        alt: 'SSN Redaction Visual',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'How to Black Out SSN on PDF Securely: The 2026 Technical Guide',
+    description: 'Learn the difference between masking and true redaction. A step-by-step guide to permanently removing Social Security Numbers from PDF files using client-side tools.',
+    images: ['https://secureredact.tech/images/blog/how-to-black-out-ssn-on-pdf/visual_0.webp'],
+  },
+};
+
+const AuthorBox = ({ author, date, reviewer }: { author: string, date: string, reviewer?: string }) => {
   return (
     <div className="flex flex-col md:flex-row md:items-center justify-between text-sm text-gray-600 mb-8 pb-8 border-b-2 border-gray-100">
       <div className="flex items-center space-x-6 mb-4 md:mb-0">
@@ -16,7 +48,7 @@ const AuthorBox: React.FC<{ author: string, date: string, reviewer?: string }> =
             <User className="w-5 h-5 text-blue-600" />
           </div>
           <div>
-            <p className="text-xs text-gray-500 uppercase font-bold">{t('blog.author')}</p>
+            <p className="text-xs text-gray-500 uppercase font-bold">Author</p>
             <p className="font-bold text-black">{author}</p>
           </div>
         </div>
@@ -26,7 +58,7 @@ const AuthorBox: React.FC<{ author: string, date: string, reviewer?: string }> =
               <CheckCircle className="w-5 h-5 text-green-600" />
             </div>
             <div>
-              <p className="text-xs text-gray-500 uppercase font-bold">{t('blog.reviewedBy')}</p>
+              <p className="text-xs text-gray-500 uppercase font-bold">Reviewed by</p>
               <p className="font-bold text-black">{reviewer}</p>
             </div>
           </div>
@@ -34,27 +66,26 @@ const AuthorBox: React.FC<{ author: string, date: string, reviewer?: string }> =
       </div>
       <div className="flex items-center font-medium bg-gray-50 px-3 py-1 rounded border border-gray-200">
         <Calendar className="w-4 h-4 mr-2" />
-        {t('blog.publishedOn')}: {date}
+        Published on: {date}
       </div>
     </div>
   );
 };
 
-// Custom components for cleaner layout
-const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+const SectionTitle = ({ children }: { children: React.ReactNode }) => (
   <h2 className="text-3xl font-black text-black mt-12 mb-6 pb-2 border-b-4 border-black inline-block">
     {children}
   </h2>
 );
 
-const SubHeading: React.FC<{ label: string, title: string }> = ({ label, title }) => (
+const SubHeading = ({ label, title }: { label: string, title: string }) => (
   <div className="mt-10 mb-4">
     <span className="block text-xs font-bold tracking-widest text-blue-600 uppercase mb-1">{label}</span>
     <h3 className="text-xl font-bold text-gray-900 leading-tight">{title}</h3>
   </div>
 );
 
-const StyledList: React.FC<{ items: React.ReactNode[] }> = ({ items }) => (
+const StyledList = ({ items }: { items: React.ReactNode[] }) => (
   <ol className="space-y-4 my-6 pl-0">
     {items.map((item, idx) => (
       <li key={idx} className="flex items-start">
@@ -67,14 +98,41 @@ const StyledList: React.FC<{ items: React.ReactNode[] }> = ({ items }) => (
   </ol>
 );
 
-export default function BlogPostContent() {
-  const { t, i18n } = useTranslation();
-  const currentLang = i18n.language || 'en';
+export default function Page() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: 'Architecting Secure Document Workflows: A Technical Guide to SSN Redaction',
+    description: 'Learn the difference between masking and true redaction. A step-by-step guide to permanently removing Social Security Numbers from PDF files using client-side tools.',
+    image: 'https://secureredact.tech/images/blog/how-to-black-out-ssn-on-pdf/visual_0.webp',
+    datePublished: '2026-01-26',
+    dateModified: '2026-01-26',
+    author: {
+      '@type': 'Organization',
+      name: 'Security Team',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'SecureRedact',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://secureredact.tech/favicon.svg',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': 'https://secureredact.tech/blog/how-to-black-out-ssn-on-pdf',
+    },
+  };
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-12 bg-white min-h-screen">
-      <Link href={`/${currentLang}/blog`} className="inline-flex items-center text-gray-600 hover:text-black mb-8 font-bold group">
-        <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" /> {t('blog.backToBlog')}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Link href="/blog" className="inline-flex items-center text-gray-600 hover:text-black mb-8 font-bold group">
+        <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" /> Back to Blog
       </Link>
       
       <article className="prose prose-lg max-w-none prose-p:text-gray-800 prose-p:leading-relaxed prose-headings:font-black font-light">
@@ -113,7 +171,7 @@ export default function BlogPostContent() {
           <strong>Security Warning:</strong> From a data hygiene perspective, a masked SSN is fully accessible. Any script capable of parsing the document object model (DOM) can bypass the graphical overlay.
         </div>
 
-        <SubHeading label="The Mechanism" title="Why &quot;Black Boxes&quot; Fail" />
+        <SubHeading label="The Mechanism" title='Why "Black Boxes" Fail' />
         <p>
           The underlying technology of PDF rendering separates the visual presentation from the semantic content. When a user applies a black box using a standard drawing tool, they are adding a new layer to the stack. The text layer remains beneath it.
         </p>
@@ -165,7 +223,7 @@ export default function BlogPostContent() {
           Under the hood, when a user zooms in to select an SSN, the application is recalculating the render matrix. It translates the screen coordinates (mouse clicks) into PDF page coordinates. This translation must be exact. If the software relies on a low-resolution preview, the user might believe they have covered the number, but the actual redaction coordinate sent to the processing engine might be shifted by a few points.
         </p>
 
-        <SubHeading label="Experience" title="The &quot;Drift&quot; Pitfall" />
+        <SubHeading label="Experience" title='The "Drift" Pitfall' />
         <p>
           In high-volume processing centers, speed often compromises accuracy. A common pitfall occurs when users attempt to redact data on a document that has been scanned at a skew (slightly rotated). A rectangular redaction tool applied to a skewed number will inevitably cover non-target data or leave corners of the target data exposed.
         </p>
@@ -250,16 +308,16 @@ export default function BlogPostContent() {
         </p>
         
         <StyledList items={[
-          <span><strong>The Visual Layer:</strong> Does the document look correct?</span>,
-          <span><strong>The Text Layer:</strong> Can the text be highlighted or searched?</span>,
-          <span><strong>The Code Layer:</strong> Does the raw data stream contain the byte sequence?</span>
+          <span key="1"><strong>The Visual Layer:</strong> Does the document look correct?</span>,
+          <span key="2"><strong>The Text Layer:</strong> Can the text be highlighted or searched?</span>,
+          <span key="3"><strong>The Code Layer:</strong> Does the raw data stream contain the byte sequence?</span>
         ]} />
 
         <p>
           When using our Secure Rasterization method, the entire page content is converted to a flat image. This means the text layer is completely removed.
         </p>
 
-        <SubHeading label="Experience" title="The &quot;Ghost Text&quot; Phenomenon" />
+        <SubHeading label="Experience" title='The "Ghost Text" Phenomenon' />
         <p>
           A common edge case in PDF processing is "ghost text." This occurs when OCR is performed on a document <em>before</em> redaction. The OCR creates a hidden text layer behind the image to facilitate searching.
         </p>
@@ -304,7 +362,7 @@ export default function BlogPostContent() {
         </div>
 
         <div className="text-center my-12">
-          <Link href={`/${currentLang}/`} className="inline-block bg-black text-white font-bold py-4 px-8 rounded-full hover:bg-gray-800 transition-colors text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+          <Link href="/" className="inline-block bg-black text-white font-bold py-4 px-8 rounded-full hover:bg-gray-800 transition-colors text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1">
             Try Secure PDF Editor Now
           </Link>
         </div>
@@ -343,6 +401,12 @@ export default function BlogPostContent() {
           ))}
         </ul>
       </article>
+
+      {/* Blog Specific FAQ */}
+      <div className="mt-16 pt-8 border-t-2 border-black">
+        <h3 className="text-2xl font-black mb-6">Frequently Asked Questions</h3>
+        <FAQ />
+      </div>
     </div>
   );
 }

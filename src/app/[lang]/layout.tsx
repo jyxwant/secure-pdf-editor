@@ -5,7 +5,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import '../globals.css';
 import I18nProvider from '@/components/I18nProvider';
 import { resources } from '@/i18n/resources';
-import { headers } from 'next/headers';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,9 +22,6 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   const lang = params.lang || 'en';
   // @ts-ignore
   const t = resources[lang]?.translation || resources['en'].translation;
-  
-  const headersList = headers();
-  const host = headersList.get('host') || 'secureredact.tech';
   
   const currentUrl = lang === 'en' ? 'https://secureredact.tech' : `https://secureredact.tech/${lang}`;
   
