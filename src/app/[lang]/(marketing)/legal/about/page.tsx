@@ -16,6 +16,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
         'en': 'https://secureredact.tech/en/legal/about',
         'zh': 'https://secureredact.tech/zh/legal/about',
         'fr': 'https://secureredact.tech/fr/legal/about',
+        'x-default': 'https://secureredact.tech/en/legal/about',
       },
     },
   };

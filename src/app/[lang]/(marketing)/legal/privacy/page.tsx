@@ -16,6 +16,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
         'en': 'https://secureredact.tech/en/legal/privacy',
         'zh': 'https://secureredact.tech/zh/legal/privacy',
         'fr': 'https://secureredact.tech/fr/legal/privacy',
+        'x-default': 'https://secureredact.tech/en/legal/privacy',
       },
     },
   };

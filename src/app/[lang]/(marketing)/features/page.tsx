@@ -16,6 +16,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
         'en': 'https://secureredact.tech/en/features',
         'zh': 'https://secureredact.tech/zh/features',
         'fr': 'https://secureredact.tech/fr/features',
+        'x-default': 'https://secureredact.tech/en/features',
       },
     },
   };

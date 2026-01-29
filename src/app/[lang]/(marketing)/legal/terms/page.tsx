@@ -16,6 +16,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
         'en': 'https://secureredact.tech/en/legal/terms',
         'zh': 'https://secureredact.tech/zh/legal/terms',
         'fr': 'https://secureredact.tech/fr/legal/terms',
+        'x-default': 'https://secureredact.tech/en/legal/terms',
       },
     },
   };
