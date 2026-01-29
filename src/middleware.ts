@@ -27,34 +27,47 @@ export function middleware(request: NextRequest) {
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
-    pathname.includes('.') || // 排除文件 (如 .ico, .png)
+    pathname.includes('.') || 
     pathname === '/favicon.ico'
   ) {
     return
   }
 
-  // 检查路径中是否已包含语言
-  const pathnameIsMissingLocale = locales.every(
-    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+  // 1. 如果访问的是 /en 或 /en/...，强制重定向到无前缀版本 (308 Permanent Redirect)
+  // 这是为了防止重复内容 (/en 和 / 内容一样)
+  if (pathname === '/en' || pathname.startsWith('/en/')) {
+    const newPath = pathname.replace(/^\/en/, '') || '/'
+    return NextResponse.redirect(new URL(newPath, request.url), 308)
+  }
+
+  // 2. 检查路径是否包含其他语言前缀 (zh, fr)
+  const pathnameHasLocale = locales.some(
+    (locale) => locale !== defaultLocale && (pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`)
   )
 
-  // 如果缺少语言前缀，重定向
-  if (pathnameIsMissingLocale) {
-    const locale = getLocale(request)
-    
-    // 如果是默认语言且偏好不显示前缀，可以在这里处理
-    // 但为了 SEO 统一性，通常建议所有语言都带前缀，或者默认语言不带
-    // 这里我们采用所有语言都带前缀的策略，或者保留根路径重定向到默认语言
-    
-    return NextResponse.redirect(
-      new URL(`/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}`, request.url)
-    )
+  if (pathnameHasLocale) {
+    return NextResponse.next()
   }
+
+  // 3. 处理无前缀路径 (隐含为英文)
+  
+  // 特殊情况：如果是根路径 '/'，且用户偏好非默认语言，跳转到对应语言
+  if (pathname === '/') {
+    const preferredLocale = getLocale(request)
+    if (preferredLocale !== defaultLocale) {
+      return NextResponse.redirect(new URL(`/${preferredLocale}`, request.url))
+    }
+  }
+
+  // 4. 对于所有无前缀的路径 (视为默认语言)，Rewrite 到 /en/...
+  // 这样 Next.js 的 [lang] 路由才能捕获到 params.lang = 'en'
+  return NextResponse.rewrite(
+    new URL(`/${defaultLocale}${pathname}`, request.url)
+  )
 }
 
 export const config = {
   matcher: [
-    // Skip all internal paths (_next)
     '/((?!_next|favicon.ico).*)',
   ],
 }

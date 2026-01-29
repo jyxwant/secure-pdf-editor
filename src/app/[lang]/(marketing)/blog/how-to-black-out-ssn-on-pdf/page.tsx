@@ -8,12 +8,12 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title: 'How to Black Out SSN on PDF: A Technical Guide | SecureRedact',
     description: 'Learn how to securely redact SSN from PDF documents. A technical guide on why black boxes fail and how to use client-side processing for GDPR/HIPAA compliance.',
     alternates: {
-      canonical: 'https://secureredact.tech/en/blog/how-to-black-out-ssn-on-pdf',
+      canonical: lang === 'en' ? 'https://secureredact.tech/blog/how-to-black-out-ssn-on-pdf' : `https://secureredact.tech/${lang}/blog/how-to-black-out-ssn-on-pdf`,
       languages: {
-        'en': 'https://secureredact.tech/en/blog/how-to-black-out-ssn-on-pdf',
+        'en': 'https://secureredact.tech/blog/how-to-black-out-ssn-on-pdf',
         'zh': 'https://secureredact.tech/zh/blog/how-to-black-out-ssn-on-pdf',
         'fr': 'https://secureredact.tech/fr/blog/how-to-black-out-ssn-on-pdf',
-        'x-default': 'https://secureredact.tech/en/blog/how-to-black-out-ssn-on-pdf',
+        'x-default': 'https://secureredact.tech/blog/how-to-black-out-ssn-on-pdf',
       },
     },
     openGraph: {

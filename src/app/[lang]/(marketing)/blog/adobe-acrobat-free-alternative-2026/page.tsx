@@ -8,12 +8,12 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title: 'Adobe Acrobat Free Alternative 2026: Zero-Trust PDF Redaction Guide',
     description: 'Explore why client-side WASM redaction is the superior alternative to Adobe Acrobat. A technical guide on data privacy, software bloat, and zero-trust workflows.',
     alternates: {
-      canonical: 'https://secureredact.tech/en/blog/adobe-acrobat-free-alternative-2026',
+      canonical: lang === 'en' ? 'https://secureredact.tech/blog/adobe-acrobat-free-alternative-2026' : `https://secureredact.tech/${lang}/blog/adobe-acrobat-free-alternative-2026`,
       languages: {
-        'en': 'https://secureredact.tech/en/blog/adobe-acrobat-free-alternative-2026',
+        'en': 'https://secureredact.tech/blog/adobe-acrobat-free-alternative-2026',
         'zh': 'https://secureredact.tech/zh/blog/adobe-acrobat-free-alternative-2026',
         'fr': 'https://secureredact.tech/fr/blog/adobe-acrobat-free-alternative-2026',
-        'x-default': 'https://secureredact.tech/en/blog/adobe-acrobat-free-alternative-2026',
+        'x-default': 'https://secureredact.tech/blog/adobe-acrobat-free-alternative-2026',
       },
     },
     openGraph: {

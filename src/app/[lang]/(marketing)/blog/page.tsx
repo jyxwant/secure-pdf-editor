@@ -11,12 +11,12 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title: t['meta.title.blog'],
     description: t['blog.subtitle'],
     alternates: {
-      canonical: `https://secureredact.tech/${lang}/blog`,
+      canonical: lang === 'en' ? 'https://secureredact.tech/blog' : `https://secureredact.tech/${lang}/blog`,
       languages: {
-        'en': 'https://secureredact.tech/en/blog',
+        'en': 'https://secureredact.tech/blog',
         'zh': 'https://secureredact.tech/zh/blog',
         'fr': 'https://secureredact.tech/fr/blog',
-        'x-default': 'https://secureredact.tech/en/blog',
+        'x-default': 'https://secureredact.tech/blog',
       },
     },
   };

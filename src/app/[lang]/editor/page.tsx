@@ -11,12 +11,12 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title: t['meta.title.editor'],
     description: t['upload.description'],
     alternates: {
-      canonical: `https://secureredact.tech/${lang}/editor`,
+      canonical: lang === 'en' ? 'https://secureredact.tech/editor' : `https://secureredact.tech/${lang}/editor`,
       languages: {
-        'en': 'https://secureredact.tech/en/editor',
+        'en': 'https://secureredact.tech/editor',
         'zh': 'https://secureredact.tech/zh/editor',
         'fr': 'https://secureredact.tech/fr/editor',
-        'x-default': 'https://secureredact.tech/en/editor',
+        'x-default': 'https://secureredact.tech/editor',
       },
     },
   };

@@ -11,12 +11,12 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title: `${t['faq.title']} - ${t['faq.subtitle']}`,
     description: t['faq.whatIsRedaction.answer'],
     alternates: {
-      canonical: `https://secureredact.tech/${lang}/faq`,
+      canonical: lang === 'en' ? 'https://secureredact.tech/faq' : `https://secureredact.tech/${lang}/faq`,
       languages: {
-        'en': 'https://secureredact.tech/en/faq',
+        'en': 'https://secureredact.tech/faq',
         'zh': 'https://secureredact.tech/zh/faq',
         'fr': 'https://secureredact.tech/fr/faq',
-        'x-default': 'https://secureredact.tech/en/faq',
+        'x-default': 'https://secureredact.tech/faq',
       },
     },
   };

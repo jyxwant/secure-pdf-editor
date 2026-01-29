@@ -11,12 +11,12 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title: `${t['features.title']} - ${t['features.subtitle']}`,
     description: t['features.localProcessing.description'],
     alternates: {
-      canonical: `https://secureredact.tech/${lang}/features`,
+      canonical: lang === 'en' ? 'https://secureredact.tech/features' : `https://secureredact.tech/${lang}/features`,
       languages: {
-        'en': 'https://secureredact.tech/en/features',
+        'en': 'https://secureredact.tech/features',
         'zh': 'https://secureredact.tech/zh/features',
         'fr': 'https://secureredact.tech/fr/features',
-        'x-default': 'https://secureredact.tech/en/features',
+        'x-default': 'https://secureredact.tech/features',
       },
     },
   };

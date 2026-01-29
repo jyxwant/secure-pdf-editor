@@ -11,12 +11,12 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title: t['legal.about.title'],
     description: t['legal.about.intro'],
     alternates: {
-      canonical: `https://secureredact.tech/${lang}/legal/about`,
+      canonical: lang === 'en' ? 'https://secureredact.tech/legal/about' : `https://secureredact.tech/${lang}/legal/about`,
       languages: {
-        'en': 'https://secureredact.tech/en/legal/about',
+        'en': 'https://secureredact.tech/legal/about',
         'zh': 'https://secureredact.tech/zh/legal/about',
         'fr': 'https://secureredact.tech/fr/legal/about',
-        'x-default': 'https://secureredact.tech/en/legal/about',
+        'x-default': 'https://secureredact.tech/legal/about',
       },
     },
   };

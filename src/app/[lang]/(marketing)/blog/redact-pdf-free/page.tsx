@@ -11,12 +11,12 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     title: t['blog.post2.title'],
     description: t['blog.post2.excerpt'],
     alternates: {
-      canonical: `https://secureredact.tech/${lang}/blog/redact-pdf-free`,
+      canonical: lang === 'en' ? 'https://secureredact.tech/blog/redact-pdf-free' : `https://secureredact.tech/${lang}/blog/redact-pdf-free`,
       languages: {
-        'en': 'https://secureredact.tech/en/blog/redact-pdf-free',
+        'en': 'https://secureredact.tech/blog/redact-pdf-free',
         'zh': 'https://secureredact.tech/zh/blog/redact-pdf-free',
         'fr': 'https://secureredact.tech/fr/blog/redact-pdf-free',
-        'x-default': 'https://secureredact.tech/en/blog/redact-pdf-free',
+        'x-default': 'https://secureredact.tech/blog/redact-pdf-free',
       },
     },
   };
