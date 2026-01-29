@@ -1,18 +1,26 @@
-'use client';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { FAQ } from '@/components/SEO/FAQ';
+import { Metadata } from 'next';
+import FaqClient from './FaqClient';
+import { resources } from '@/i18n/resources';
 
-export default function FAQPage() {
-  const { t } = useTranslation();
-  return (
-    <div className="py-12 bg-[#f0f0f0] min-h-[calc(100vh-64px-200px)]">
-      <div className="max-w-4xl mx-auto px-6 mb-12 text-center">
-        <div className="inline-block px-8 py-3 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-          <h1 className="text-3xl font-black text-black uppercase tracking-wide m-0">{t('faq.title')}</h1>
-        </div>
-      </div>
-      <FAQ />
-    </div>
-  );
+export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
+  const lang = params.lang || 'en';
+  // @ts-ignore
+  const t = resources[lang]?.translation || resources['en'].translation;
+
+  return {
+    title: `${t['faq.title']} - ${t['faq.subtitle']}`,
+    description: t['faq.whatIsRedaction.answer'],
+    alternates: {
+      canonical: `https://secureredact.tech/${lang}/faq`,
+      languages: {
+        'en': 'https://secureredact.tech/en/faq',
+        'zh': 'https://secureredact.tech/zh/faq',
+        'fr': 'https://secureredact.tech/fr/faq',
+      },
+    },
+  };
+}
+
+export default function FaqPage() {
+  return <FaqClient />;
 }

@@ -1,23 +1,26 @@
-'use client';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import LegalWrapper from '@/components/legal/LegalWrapper';
+import { Metadata } from 'next';
+import AboutClient from './AboutClient';
+import { resources } from '@/i18n/resources';
+
+export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
+  const lang = params.lang || 'en';
+  // @ts-ignore
+  const t = resources[lang]?.translation || resources['en'].translation;
+
+  return {
+    title: t['legal.about.title'],
+    description: t['legal.about.intro'],
+    alternates: {
+      canonical: `https://secureredact.tech/${lang}/legal/about`,
+      languages: {
+        'en': 'https://secureredact.tech/en/legal/about',
+        'zh': 'https://secureredact.tech/zh/legal/about',
+        'fr': 'https://secureredact.tech/fr/legal/about',
+      },
+    },
+  };
+}
 
 export default function AboutPage() {
-  const { t } = useTranslation();
-  return (
-    <LegalWrapper title={t('legal.about.title')}>
-      <p>{t('legal.about.intro')}</p>
-      
-      <h3>{t('legal.about.mission.title')}</h3>
-      <p>{t('legal.about.mission.content')}</p>
-      
-      <h3>{t('legal.about.why.title')}</h3>
-      <ul>
-        <li><strong>{t('legal.about.why.1')}</strong></li>
-        <li><strong>{t('legal.about.why.2')}</strong></li>
-        <li><strong>{t('legal.about.why.3')}</strong></li>
-      </ul>
-    </LegalWrapper>
-  );
+  return <AboutClient />;
 }
