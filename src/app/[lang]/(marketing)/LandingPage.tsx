@@ -47,7 +47,7 @@ export default function LandingPage() {
 
           <div className="mt-10 flex justify-center gap-4">
             <Link
-              href={`/${currentLang}/editor`}
+              href={currentLang === 'en' ? '/editor' : `/${currentLang}/editor`}
               className="neo-button group inline-flex items-center px-8 py-3 text-lg font-bold bg-[#ff6b6b] text-white hover:bg-[#ff5252] transform hover:-translate-y-1 transition-all"
             >
               {t('hero.startRedacting')}
@@ -103,7 +103,7 @@ export default function LandingPage() {
             {t('hero.cta.title')}
           </h2>
           <Link
-            href={`/${currentLang}/editor`}
+            href={currentLang === 'en' ? '/editor' : `/${currentLang}/editor`}
             className="neo-button inline-flex items-center px-8 py-4 text-xl font-bold bg-[#4ecdc4] text-black hover:bg-[#45b7af] transform hover:-translate-y-1 transition-all"
           >
             {t('hero.cta.button')}

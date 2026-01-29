@@ -15,7 +15,7 @@ export const viewport: Viewport = {
 };
 
 export async function generateStaticParams() {
-  return [{ lang: 'en' }, { lang: 'zh' }, { lang: 'fr' }];
+  return [{ lang: 'zh' }, { lang: 'fr' }];
 }
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
