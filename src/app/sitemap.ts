@@ -115,8 +115,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   routeConfigs.forEach((config) => {
     const targetLanguages = config.languages || languages;
     targetLanguages.forEach((lang) => {
+      // 关键修改：如果是 'en'，不添加语言前缀
+      const langPrefix = lang === 'en' ? '' : `/${lang}`;
+      
       sitemap.push({
-        url: `${baseUrl}/${lang}${config.path}`,
+        url: `${baseUrl}${langPrefix}${config.path}`,
         lastModified: new Date(config.lastModified),
         changeFrequency: config.changeFrequency,
         priority: config.priority,

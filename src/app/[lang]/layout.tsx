@@ -27,6 +27,8 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   const headersList = headers();
   const host = headersList.get('host') || 'secureredact.tech';
   
+  const currentUrl = lang === 'en' ? 'https://secureredact.tech' : `https://secureredact.tech/${lang}`;
+  
   return {
     title: t['meta.title.home'],
     description: t['meta.desc.home'],
@@ -37,7 +39,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
       title: t['meta.title.home'],
       description: t['meta.desc.home'],
       type: 'website',
-      url: `https://secureredact.tech/${lang}`,
+      url: currentUrl,
       siteName: 'SecureRedact - PDF Redaction Tool',
       images: [
         {
@@ -71,11 +73,13 @@ export default function RootLayout({
   // @ts-ignore
   const t = resources[lang]?.translation || resources['en'].translation;
 
+  const currentUrl = lang === 'en' ? 'https://secureredact.tech' : `https://secureredact.tech/${lang}`;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "SecureRedact - PDF Redaction Tool",
-    "url": `https://secureredact.tech/${lang}`,
+    "url": currentUrl,
     "description": t['meta.desc.home'],
     "author": {
       "@type": "Organization",

@@ -5,12 +5,12 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   const lang = params.lang || 'en';
   return {
     alternates: {
-      canonical: `https://secureredact.tech/${lang}`,
+      canonical: lang === 'en' ? 'https://secureredact.tech' : `https://secureredact.tech/${lang}`,
       languages: {
-        'en': 'https://secureredact.tech/en',
+        'en': 'https://secureredact.tech',
         'zh': 'https://secureredact.tech/zh',
         'fr': 'https://secureredact.tech/fr',
-        'x-default': 'https://secureredact.tech/',
+        'x-default': 'https://secureredact.tech',
       }
     }
   };
