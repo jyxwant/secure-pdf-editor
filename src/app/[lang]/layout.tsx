@@ -73,27 +73,10 @@ export default function RootLayout({
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
+    "@type": "WebSite",
     "name": "SecureRedact - PDF Redaction Tool",
-    "applicationCategory": "BusinessApplication",
-    "applicationSubCategory": "Document Editor",
-    "operatingSystem": "Web Browser",
     "url": `https://secureredact.tech/${lang}`,
     "description": t['meta.desc.home'],
-    "featureList": [ // Fixed: features -> featureList
-      "PDF Redaction",
-      "Sensitive Information Removal", 
-      "Local Processing",
-      "Multi-language Support",
-      "GDPR Compliance",
-      "HIPAA Compliance"
-    ],
-    "browserRequirements": "Requires JavaScript enabled browser",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
     "author": {
       "@type": "Organization",
       "name": "SecureRedact",
@@ -104,12 +87,7 @@ export default function RootLayout({
       "name": "SecureRedact",
       "url": "https://secureredact.tech"
     },
-    "screenshot": "https://secureredact.tech/screenshot.png",
-    "softwareVersion": "1.0.0",
-    "datePublished": "2024-08-31",
-    "dateModified": "2024-09-01",
     "license": "https://github.com/jyxwant/secure-pdf-editor/blob/main/LICENSE",
-    // Removed invalid programmingLanguage field
     "keywords": "PDF redaction, document privacy, sensitive data removal, GDPR compliance, HIPAA compliance, online PDF editor",
     "inLanguage": lang
   };
