@@ -13,6 +13,11 @@ i18n
     nonExplicitSupportedLngs: true, 
     debug: false, 
     
+    // 关键配置：关闭 Suspense 以支持 SSR/SSG 正确渲染内容
+    react: {
+      useSuspense: false
+    },
+    
     interpolation: {
       escapeValue: false,
     },
