@@ -20,13 +20,13 @@ const routeConfigs: RouteConfig[] = [
   // 核心页面
   { 
     path: '', 
-    lastModified: '2026-01-21', 
+    lastModified: '2026-01-29', 
     changeFrequency: 'weekly', 
     priority: 1.0 
   },
   { 
     path: '/editor', 
-    lastModified: '2026-01-21', 
+    lastModified: '2026-01-29', 
     changeFrequency: 'weekly', 
     priority: 0.9 
   },
@@ -34,19 +34,19 @@ const routeConfigs: RouteConfig[] = [
   // 营销页面
   { 
     path: '/features', 
-    lastModified: '2026-01-18', 
+    lastModified: '2026-01-29', 
     changeFrequency: 'monthly', 
     priority: 0.8 
   },
   { 
     path: '/guide', 
-    lastModified: '2026-01-18', 
+    lastModified: '2026-01-29', 
     changeFrequency: 'monthly', 
     priority: 0.8 
   },
   { 
     path: '/faq', 
-    lastModified: '2026-01-18', 
+    lastModified: '2026-01-29', 
     changeFrequency: 'monthly', 
     priority: 0.8 
   },
@@ -54,7 +54,7 @@ const routeConfigs: RouteConfig[] = [
   // 博客列表
   { 
     path: '/blog', 
-    lastModified: '2026-01-21', 
+    lastModified: '2026-01-29', 
     changeFrequency: 'weekly', 
     priority: 0.9 
   },
@@ -62,27 +62,27 @@ const routeConfigs: RouteConfig[] = [
   // 博客文章
   { 
     path: '/blog/how-to-redact-pdf', 
-    lastModified: '2026-01-15', 
+    lastModified: '2026-01-29', 
     changeFrequency: 'monthly', 
     priority: 0.8 
   },
   { 
     path: '/blog/redact-pdf-free', 
-    lastModified: '2026-01-10', 
+    lastModified: '2026-01-29', 
     changeFrequency: 'monthly', 
     priority: 0.8 
   },
   // English-only technical post
   {
     path: '/blog/how-to-black-out-ssn-on-pdf',
-    lastModified: '2026-01-26',
+    lastModified: '2026-01-29', 
     changeFrequency: 'monthly',
     priority: 0.8,
     languages: ['en']
   },
   {
     path: '/blog/adobe-acrobat-free-alternative-2026',
-    lastModified: '2026-01-27',
+    lastModified: '2026-01-29', 
     changeFrequency: 'monthly',
     priority: 0.8,
     languages: ['en']
@@ -91,19 +91,19 @@ const routeConfigs: RouteConfig[] = [
   // 法律页面
   { 
     path: '/legal/about', 
-    lastModified: '2026-01-01', 
+    lastModified: '2026-01-29', 
     changeFrequency: 'yearly', 
     priority: 0.5 
   },
   { 
     path: '/legal/privacy', 
-    lastModified: '2026-01-01', 
+    lastModified: '2026-01-29', 
     changeFrequency: 'yearly', 
     priority: 0.5 
   },
   { 
     path: '/legal/terms', 
-    lastModified: '2026-01-01', 
+    lastModified: '2026-01-29', 
     changeFrequency: 'yearly', 
     priority: 0.5 
   },
