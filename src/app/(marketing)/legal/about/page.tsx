@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import AboutClient from '../../[lang]/(marketing)/legal/about/AboutClient';
+import AboutClient from '../../../[lang]/(marketing)/legal/about/AboutClient';
 import { resources } from '@/i18n/resources';
 
 const t = resources['en'].translation;

@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import PrivacyClient from '../../[lang]/(marketing)/legal/privacy/PrivacyClient';
+import PrivacyClient from '../../../[lang]/(marketing)/legal/privacy/PrivacyClient';
 import { resources } from '@/i18n/resources';
 
 const t = resources['en'].translation;
