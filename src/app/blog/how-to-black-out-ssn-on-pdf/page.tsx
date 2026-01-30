@@ -10,8 +10,6 @@ export const metadata: Metadata = {
     canonical: 'https://secureredact.tech/blog/how-to-black-out-ssn-on-pdf',
     languages: {
       'en': 'https://secureredact.tech/blog/how-to-black-out-ssn-on-pdf',
-      'zh': 'https://secureredact.tech/zh/blog/how-to-black-out-ssn-on-pdf',
-      'fr': 'https://secureredact.tech/fr/blog/how-to-black-out-ssn-on-pdf',
       'x-default': 'https://secureredact.tech/blog/how-to-black-out-ssn-on-pdf',
     },
   },
