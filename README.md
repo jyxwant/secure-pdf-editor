@@ -152,6 +152,12 @@ npm run test:ui   # with UI
 
 ---
 
+## 🔗 Related Tools
+
+- [MojisuCount](https://mojisucount.com/) — A privacy-first Japanese character counter that runs entirely in your browser.
+
+---
+
 ## 📝 License
 
 MIT License — see LICENSE for details.
